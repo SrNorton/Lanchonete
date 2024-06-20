@@ -42,7 +42,15 @@ class SavoryScreen extends StatelessWidget {
                 ),
               ),
                 SizedBox(height: 30,),
-                    SavoryCard(),
+                    SizedBox(
+                      height: 162,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: listSavory.length,
+                        itemBuilder: (context, index){
+                          return SavoryCard(image: listSavory[index].image, title: listSavory[index].title);
+                        }),
+                    )
             ],
           ),
          ),

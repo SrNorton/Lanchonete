@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:lanchonete_app/components/juiceCard.dart';
+
 import 'package:lanchonete_app/components/prepareCard.dart';
 import 'package:lanchonete_app/constants/constants.dart';
 
@@ -44,7 +46,15 @@ class _JuiceScreenState extends State<JuiceScreen> {
                 ),
               ),
                 SizedBox(height: 30,),
-                JuiceCard(),
+                Expanded(
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: listJuice.length,
+                    itemBuilder: (context, index){
+                      return 
+                      JuiceCard(name: listJuice[index].name, image: listJuice[index].image);
+                    }),
+                )
                   
             ],
           ),

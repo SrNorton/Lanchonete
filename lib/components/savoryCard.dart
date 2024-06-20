@@ -4,12 +4,12 @@ import '../constants/constants.dart';
 
 class SavoryCard extends StatelessWidget {
  
- String? image;
- String? title;
+ final String image;
+ final String title;
  
    SavoryCard({
-    this.image,
-    this.title,
+    required this.image,
+    required this.title,
     super.key,
   });
 
@@ -31,7 +31,7 @@ class SavoryCard extends StatelessWidget {
               padding: const EdgeInsets.only(left: 8),
               child: CircleAvatar(
                 radius: 50,
-                child: Image.asset('assets/images/esfiha.png'),
+                child: Image.asset(image),
               ),
             ),
             Expanded(
@@ -39,7 +39,7 @@ class SavoryCard extends StatelessWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(top: 10, right: 5),
-                    child: Text('Esfiha de Frango',
+                    child: Text(title,
                     style: TextStyle(
                       fontSize: 20,
                                       fontFamily: kfontFamily,
@@ -56,3 +56,12 @@ class SavoryCard extends StatelessWidget {
     );
   }
 }
+
+
+List<SavoryCard> listSavory = [
+  SavoryCard(image: 'assets/images/esfiha.png', title: 'Esfiha de Frango'),
+  SavoryCard(image: 'assets/images/coxinha.png', title: 'Coxinha de Frango'),
+  SavoryCard(image: 'assets/images/espetinho.png', title: 'Espetinho de Queijo'),
+  SavoryCard(image: 'assets/images/pastelcarne.png', title: 'Pastel de Carne'),
+  SavoryCard(image: 'assets/images/assadocarne.png', title: 'Assado de Carne'),
+];
