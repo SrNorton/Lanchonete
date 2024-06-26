@@ -2,17 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:lanchonete_app/components/buttom.dart';
 import 'package:lanchonete_app/constants/constants.dart';
 import 'package:lanchonete_app/helpers/validators.dart';
+import 'package:lanchonete_app/manager/userManager.dart';
+import 'package:lanchonete_app/models/userProfile.dart';
+import 'package:provider/provider.dart';
 
 class RegisterScreen extends StatelessWidget {
   
+   
+
 
   final _formKey = GlobalKey<FormState>();
     
-    TextEditingController _nameController = TextEditingController();
-    TextEditingController _phoneController = TextEditingController();
-    TextEditingController _emailController = TextEditingController();
-    TextEditingController _passController = TextEditingController();
-    TextEditingController _confirmController = TextEditingController();
+    final TextEditingController _nameController = TextEditingController();
+    final TextEditingController _phoneController = TextEditingController();
+    final TextEditingController _emailController = TextEditingController();
+    final TextEditingController _passController = TextEditingController();
+    final TextEditingController _confirmController = TextEditingController();
 
 
   @override
@@ -51,12 +56,19 @@ class RegisterScreen extends StatelessWidget {
                 key: _formKey,
                 child: SingleChildScrollView(
                   scrollDirection: Axis.vertical,
-                  child: Column( 
+                  child: Consumer<UserManager>(
+                    builder: (_, usermanager, __){
+                      return Column( 
                     children: [
+                      
+                      
+                      //NAME **********
+
+
                       Padding(
                         padding: const EdgeInsets.only(top: 60, right: 50, left: 50, bottom: 46),
                         child: TextFormField(
-                          
+                          enabled: !usermanager.isLoading,
                           validator: (value){
                             if(value == null || value.isEmpty){return 'Informe o seu nome!';}
                             if(value.length > 10){return 'O nome deve ter 10 caracteres ou menos';}
@@ -75,10 +87,14 @@ class RegisterScreen extends StatelessWidget {
                           ),
                         ),
                       ),
+
+                      //PHONE 
+
                       Padding(
                         padding: const EdgeInsets.only( right: 50, left: 50, bottom: 46),
                         child: TextFormField(
                           keyboardType: TextInputType.phone,
+                          enabled: !usermanager.isLoading,
                           
                           validator: (value){
                            if(phoneValid(value!)
@@ -99,10 +115,14 @@ class RegisterScreen extends StatelessWidget {
                           ),
                         ),
                       ),
+
+                      //EMAIL 
+
                        Padding(
                         padding: const EdgeInsets.only( right: 50, left: 50, bottom: 46),
                         child: TextFormField(
-                        
+                          enabled: !usermanager.isLoading,
+                          
                           keyboardType: TextInputType.emailAddress,
                           validator: (value){
                            if(!emailValid(value!))
@@ -122,14 +142,19 @@ class RegisterScreen extends StatelessWidget {
                           ),
                         ),
                       ),
+
+                      //PASSWORD 
+
                       Padding(
                         padding: const EdgeInsets.only( right: 50, left: 50, bottom: 46),
                         child: TextFormField(
                           obscureText: true,
+                          enabled: !usermanager.isLoading,
+
                           controller: _passController,
                           validator: (value){ 
                              if(value == null || value.isEmpty){return 'Inserir sua senha!';}
-                            if(value.length > 8){return 'A senha deve conter 8 dígitos';}
+                            if(value.length < 6){return 'A senha deve conter no mínimo 6 dígitos';}
                             return null;
                           },
                           decoration: InputDecoration(
@@ -145,9 +170,14 @@ class RegisterScreen extends StatelessWidget {
                           
                         ),
                       ),
+
+                      //CONFIRM
+
                        Padding(
                         padding: const EdgeInsets.only( right: 50, left: 50, bottom: 46),
                         child: TextFormField(
+                          enabled: !usermanager.isLoading,
+
                           obscureText: true,
                           validator: (value){
                             if(value == null || value.isEmpty){return 'Confirme a senha';}
@@ -167,19 +197,33 @@ class RegisterScreen extends StatelessWidget {
                           ),
                         ),
                       ),
+                        usermanager.isLoading ? CircularProgressIndicator(
+                      color: Colors.white,
+
+                    ) :
                      
                      Buttom(
                       title: 'Cadastre-se', 
                       function: (){
                         if(_formKey.currentState!.validate()){
-                          
+                          var user = UserProfile(
+                            
+                            name: _nameController.text,
+                            phone: _phoneController.text,
+                            email: _emailController.text,
+                            password: _passController.text,
+                            confirmPass: _confirmController.text,
+                          );
+                          usermanager.signUp(user: user, context: context);
                         }
                         
                   
                       }
                       ),
                     ],
-                    ),
+                    );
+                    }
+                    )
                 ),
               ),
             )),

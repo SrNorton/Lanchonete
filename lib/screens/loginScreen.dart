@@ -4,14 +4,15 @@ import 'package:lanchonete_app/constants/constants.dart';
 import 'package:lanchonete_app/helpers/validators.dart';
 import 'package:lanchonete_app/manager/userManager.dart';
 import 'package:lanchonete_app/models/userProfile.dart';
+import 'package:lanchonete_app/screens/registerScreen.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatelessWidget {
  
   final _formKey = GlobalKey<FormState>();
     
-    TextEditingController _emailController = TextEditingController();
-    TextEditingController _passController = TextEditingController();
+   final TextEditingController _emailController = TextEditingController();
+   final  TextEditingController _passController = TextEditingController();
 
 
    
@@ -48,13 +49,15 @@ class LoginScreen extends StatelessWidget {
               ),
               child: Form(
                 key: _formKey,
-                child: Column( 
+                child: Consumer<UserManager>(
+                  builder: (_, userManager, __){ 
+                    return Column( 
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(top: 60, right: 50, left: 50, bottom: 50),
                       child: TextFormField(
                         keyboardType: TextInputType.emailAddress,
-                        
+                        enabled: !userManager.isLoading,
                         validator: (value){
                          if(!emailValid(value!))
                          return 'E-mail inválido';
@@ -76,6 +79,7 @@ class LoginScreen extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only( right: 50, left: 50, bottom: 65),
                       child: TextFormField(
+                        enabled: !userManager.isLoading,
                         obscureText: true,
                         controller: _passController,
                         validator: (value){ 
@@ -96,16 +100,18 @@ class LoginScreen extends StatelessWidget {
                         
                       ),
                     ),
+                    userManager.isLoading ? CircularProgressIndicator(
+                      color: Colors.white,
+
+                    ) :
                     Buttom(
-                      title: 'Entre',
+                      title:  'Entre',
                       function: (){
                          
                         if(_formKey.currentState!.validate()){
-                          context.read<UserManager>().singIn(
-                           user:  UserProfile(
-                              email: _emailController.text,
-                              password: _passController.text
-                            ),
+                          userManager.singIn(
+                         email: _emailController.text,
+                         password: _passController.text,
                          context: context,
                            
                           );
@@ -128,16 +134,25 @@ class LoginScreen extends StatelessWidget {
                         ),
                      ),
                    ),
+                    userManager.isLoading ? CircularProgressIndicator(
+                      color: Colors.white,
+                      
+                    ) :
                    Buttom(
                     title: 'Cadastre-se', 
                     function: (){ 
-                      // _formKey.currentState!.validate();
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder:(context) {
+                          return RegisterScreen();
+                        },)
+                      );
 
                      
                     }
                     ),
                   ],
-                  ),
+                  );
+                  })
               ),
             )),
         ],

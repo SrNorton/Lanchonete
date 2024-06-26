@@ -5,6 +5,7 @@ import 'package:lanchonete_app/manager/userManager.dart';
 
 import 'package:lanchonete_app/screens/homeScreen.dart';
 import 'package:lanchonete_app/screens/loginScreen.dart';
+import 'package:lanchonete_app/screens/profileScreen.dart';
 import 'package:lanchonete_app/screens/registerScreen.dart';
 import 'package:provider/provider.dart';
 
@@ -40,7 +41,7 @@ class MyApp extends StatelessWidget {
           
           useMaterial3: true,
         ),
-        home: LoginScreen(),
+        home: ProfileScreen(),
       ),
     );
   }
