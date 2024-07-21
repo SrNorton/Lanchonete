@@ -48,7 +48,11 @@ class SavoryScreen extends StatelessWidget {
                         scrollDirection: Axis.horizontal,
                         itemCount: listSavory.length,
                         itemBuilder: (context, index){
-                          return SavoryCard(image: listSavory[index].image, title: listSavory[index].title);
+                          return SavoryCard(
+                            image: listSavory[index].image, 
+                            title: listSavory[index].title,
+                            price: listSavory[index].price,
+                            );
                         }),
                     )
             ],

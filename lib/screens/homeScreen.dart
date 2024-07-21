@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:lanchonete_app/components/statusDoor.dart';
 import 'package:lanchonete_app/constants/constants.dart';
+import 'package:lanchonete_app/screens/bagScreen.dart';
 import 'package:lanchonete_app/screens/juiceScreen.dart';
 import 'package:lanchonete_app/screens/savoryScreen.dart';
-import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -55,20 +56,27 @@ class _HomeScreenState extends State<HomeScreen> {
               actions: [
                  Padding(
                    padding: const EdgeInsets.only(right: 25),
-                   child: Container(
-                                 
-                                   child: Image.asset('assets/images/shopp.png',
-                                   height: 30,
-                                  width: 30,
+                   child: GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (BuildContext context)=> BagScreen()));
+                    },
+                     child: Container(
+                                   
+                                     child: Image.asset('assets/images/shopp.png',
+                                     height: 30,
+                                    width: 30,
+                                     ),
                                    ),
-                                 ),
+                   ),
                  ),
               ],
       ),
+      
       body: Column(
         
         children: [ 
-          SizedBox(height: 40,),
+          StatusDoor(),
          Expanded(
           flex: 1,
            child: DefaultTabController(
@@ -100,25 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
                  ),
          ),
       ],),
-      extendBody: true,
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.only(left: 40, right: 40,),
-        child: CustomNavigationBar(
-          strokeColor: kbaseColor,
-          
-          selectedColor: Colors.black,
-          unSelectedColor: Colors.black,
-          onTap: (index){},
-          borderRadius: Radius.circular(50),
-          isFloating: true,
-          items: [
-            CustomNavigationBarItem(
-              icon: Icon(Icons.home_outlined)),
-            CustomNavigationBarItem(
-              icon: Icon(Icons.person_outline)),
-          ],
-          ),
-      )
+     
     );
   }
 }

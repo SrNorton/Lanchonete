@@ -9,7 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:lanchonete_app/helpers/firebase_errors.dart';
 import 'package:lanchonete_app/helpers/statusMessage.dart';
+import 'package:lanchonete_app/models/door.dart';
 import 'package:lanchonete_app/models/userProfile.dart';
+import 'package:lanchonete_app/screens/pageView.dart';
 import 'package:provider/provider.dart';
 
 class UserManager extends ChangeNotifier {
@@ -26,6 +28,10 @@ class UserManager extends ChangeNotifier {
 
 
   bool isLoading = false;
+  bool? isOpen = false;
+  
+
+  bool get isLoggedIn => user != null;
 
 
   setLoading(bool value){
@@ -37,7 +43,7 @@ class UserManager extends ChangeNotifier {
 
 
   //LOGIN
-  Future<void> singIn({required email, required password, required BuildContext context}) async {
+  Future<void> signIn({required email, required password, required BuildContext context}) async {
     setLoading(true);
 
     try {
@@ -49,6 +55,7 @@ class UserManager extends ChangeNotifier {
       
 
     StatusMessage(statusSucces: true).showMySnackBar(context: context, msg: 'Login Efetuado com sucesso!');
+    Navigator.of(context).push(MaterialPageRoute(builder: (_)=> PageViewManager()));
 
     } on FirebaseAuthException catch (e){
       
@@ -85,16 +92,53 @@ class UserManager extends ChangeNotifier {
     setLoading(false);
   }
 
-
+  //LoadUser
   Future<void> _loadCurrentUser({User? firebaseUser}) async {
       final User? currentUser = firebaseUser ?? await auth.currentUser;
       if(currentUser != null){
        final DocumentSnapshot docUser = await firestore.collection('users').doc(currentUser.uid).get();
 
        user = UserProfile.fromDocument(docUser);
+       
+      
+       final docAdmin = await firestore.collection('admins').doc(user!.id).get();
+       if(docAdmin.exists){
+        user!.isAdmin = true;
+       }
+     
+
       }
       notifyListeners();
   }
     
+  bool get adminEnabled => user != null && user!.isAdmin != null;
+
   
+  
+ 
+
+  Future<void> openDoor() async {
+    
+    await firestore.collection('door').snapshots().listen((snapshot) { 
+      for (final DocumentSnapshot doc in snapshot.docs) {
+       
+        var data = Door.fromDocument(doc);
+        isOpen = data.isOpen ?? false;
+
+    firestore.collection('door').doc('AtU8C5OmkJdaJRkKnyws').update({'status': !isOpen!});
+
+    
+
+      }
+      
+    });
+
+    
+    notifyListeners();
+    
+  }
+
+  Future<void> loadAllRequests() async {
+    
+  }
 }

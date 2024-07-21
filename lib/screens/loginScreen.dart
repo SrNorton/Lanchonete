@@ -109,7 +109,7 @@ class LoginScreen extends StatelessWidget {
                       function: (){
                          
                         if(_formKey.currentState!.validate()){
-                          userManager.singIn(
+                          userManager.signIn(
                          email: _emailController.text,
                          password: _passController.text,
                          context: context,
@@ -141,7 +141,7 @@ class LoginScreen extends StatelessWidget {
                    Buttom(
                     title: 'Cadastre-se', 
                     function: (){ 
-                      Navigator.of(context).push(
+                      Navigator.of(context).pushReplacement(
                         MaterialPageRoute(builder:(context) {
                           return RegisterScreen();
                         },)
