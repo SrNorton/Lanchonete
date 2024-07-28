@@ -106,6 +106,8 @@ class LoginScreen extends StatelessWidget {
                     ) :
                     Buttom(
                       title:  'Entre',
+                    color: KbuttomAccentColor,
+
                       function: (){
                          
                         if(_formKey.currentState!.validate()){
@@ -140,6 +142,7 @@ class LoginScreen extends StatelessWidget {
                     ) :
                    Buttom(
                     title: 'Cadastre-se', 
+                    color: KbuttomAccentColor,
                     function: (){ 
                       Navigator.of(context).pushReplacement(
                         MaterialPageRoute(builder:(context) {

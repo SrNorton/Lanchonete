@@ -5,9 +5,11 @@ class Buttom extends StatelessWidget {
  
   String title;
   VoidCallback function; 
+  Color color;
    Buttom({
    required this.title,
    required this.function,
+   required this.color,
     super.key,
   });
 
@@ -20,7 +22,7 @@ class Buttom extends StatelessWidget {
         height: 65,
         decoration: BoxDecoration( 
           borderRadius: BorderRadius.circular(40),
-          color: KbuttomAccentColor,
+          color: color,
         ),
         child: Center(
           child: Text(title,

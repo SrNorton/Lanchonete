@@ -4,8 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:lanchonete_app/components/buttonManager.dart';
+import 'package:lanchonete_app/components/savoryCard.dart';
 import 'package:lanchonete_app/constants/constants.dart';
 import 'package:lanchonete_app/manager/userManager.dart';
+import 'package:lanchonete_app/screens/sectionsManagerScreen.dart';
 import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -13,6 +15,14 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    
+
+    openDor(){
+      context.read<UserManager>().openDoor();
+    }
+
+
     return Scaffold(
       body: Consumer<UserManager>(
         builder: (_, usermanager,__){
@@ -42,18 +52,22 @@ class ProfileScreen extends StatelessWidget {
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   height: 130,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: buttonsManagerList.length,
-                    itemBuilder: (context, index) {
-                      return ButtonManager(
-                        index: buttonsManagerList[index].index,
-                        image: buttonsManagerList[index].image,
-                        
-                          
-                        
-                      );
-                    },
+                  child: Row(
+                    children: [ 
+                      ButtonManager( 
+                        image: 'assets/images/door.png',
+                        function: openDor(),
+                      ),
+                      ButtonManager(
+                        image: 'assets/images/tasks.png',
+                        function:  ()async{
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => SectionsManagerScreen()));
+                        }
+                      ),
+                      ButtonManager(
+                        image: 'assets/images/megaphone.png',
+                      )
+                    ],
                   ),
                 ),
               ),

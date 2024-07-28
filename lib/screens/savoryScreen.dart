@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:lanchonete_app/components/prepareCard.dart';
 import 'package:lanchonete_app/components/savoryCard.dart';
 import 'package:lanchonete_app/constants/constants.dart';
+import 'package:lanchonete_app/manager/appManager.dart';
+import 'package:provider/provider.dart';
 
 class SavoryScreen extends StatelessWidget {
   const SavoryScreen({
@@ -79,7 +81,9 @@ class SavoryScreen extends StatelessWidget {
              ],
            ),
          ),
-         Container(
+         Consumer<AppManager>(
+          builder: (_, appmanager,__){
+            return Container(
           height: 100,
           width: 380,
           decoration: BoxDecoration( 
@@ -89,7 +93,7 @@ class SavoryScreen extends StatelessWidget {
         ),
           ),
           child: Center(
-            child: Text('Tem pão de queijo quentinho!',
+            child: Text(appmanager.notices ?? 'Os avisos estão sendo carregados...',
             style: TextStyle( 
               color: kbaseColor,
               fontSize: 16,
@@ -99,7 +103,9 @@ class SavoryScreen extends StatelessWidget {
             ),
             ),
           ),
-         ),
+         );
+          }
+          ),
       ],
       
     );

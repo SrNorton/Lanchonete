@@ -204,6 +204,8 @@ class RegisterScreen extends StatelessWidget {
                      
                      Buttom(
                       title: 'Cadastre-se', 
+                    color: KbuttomAccentColor,
+
                       function: (){
                         if(_formKey.currentState!.validate()){
                           var user = UserProfile(

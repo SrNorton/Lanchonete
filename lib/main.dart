@@ -1,14 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:lanchonete_app/manager/appManager.dart';
 import 'package:lanchonete_app/manager/userManager.dart';
 import 'package:lanchonete_app/screens/bagScreen.dart';
 
 import 'package:lanchonete_app/screens/homeScreen.dart';
 import 'package:lanchonete_app/screens/loginScreen.dart';
+import 'package:lanchonete_app/screens/noticesScreen.dart';
 import 'package:lanchonete_app/screens/pageView.dart';
 import 'package:lanchonete_app/screens/profileScreen.dart';
 import 'package:lanchonete_app/screens/registerScreen.dart';
+import 'package:lanchonete_app/screens/sectionsManagerScreen.dart';
+import 'package:lanchonete_app/screens/stoveManagerScreen.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
@@ -33,7 +37,11 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_)=> UserManager(),
           lazy: false,
-          )
+          ),
+          ChangeNotifierProvider(
+            create: (_)=> AppManager(),
+            lazy: false,
+            )
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -43,7 +51,7 @@ class MyApp extends StatelessWidget {
           
           useMaterial3: true,
         ),
-        home: LoginScreen(),
+        home: StoveManagerScreen(),
       ),
     );
   }

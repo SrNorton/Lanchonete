@@ -55,7 +55,7 @@ class UserManager extends ChangeNotifier {
       
 
     StatusMessage(statusSucces: true).showMySnackBar(context: context, msg: 'Login Efetuado com sucesso!');
-    Navigator.of(context).push(MaterialPageRoute(builder: (_)=> PageViewManager()));
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_)=> PageViewManager()));
 
     } on FirebaseAuthException catch (e){
       
