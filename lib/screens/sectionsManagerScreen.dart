@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lanchonete_app/components/buttomSectionManager.dart';
 import 'package:lanchonete_app/constants/constants.dart';
+import 'package:lanchonete_app/screens/stoveManagerScreen.dart';
 
 class SectionsManagerScreen extends StatefulWidget {
   const SectionsManagerScreen({super.key});
@@ -36,6 +37,9 @@ class _SectionsManagerScreenState extends State<SectionsManagerScreen> {
           ),
           ButtonSectionManager(
             title: 'Estufa',
+            function: () async {
+              Navigator.of(context).push(MaterialPageRoute(builder: (_)=> StoveManagerScreen()));
+            },
           ),
         ],
       ),

@@ -11,6 +11,7 @@ import 'package:lanchonete_app/helpers/firebase_errors.dart';
 import 'package:lanchonete_app/helpers/statusMessage.dart';
 import 'package:lanchonete_app/models/door.dart';
 import 'package:lanchonete_app/models/userProfile.dart';
+import 'package:lanchonete_app/screens/loginScreen.dart';
 import 'package:lanchonete_app/screens/pageView.dart';
 import 'package:provider/provider.dart';
 
@@ -65,6 +66,20 @@ class UserManager extends ChangeNotifier {
     setLoading(false);
   }
 
+  //signout
+  Future<void> signOut(BuildContext context) async {
+    try {
+    await auth.signOut();
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_)=> LoginScreen()));
+
+    print('você se desconectou');
+      
+    } catch (e) {
+      print('erro no signout $e');
+    }
+     
+  }
+
 
 
   //REGISTER
@@ -82,6 +97,8 @@ class UserManager extends ChangeNotifier {
       await user.saveData();
 
     StatusMessage(statusSucces: true).showMySnackBar(context: context, msg: 'Cadastro Efetuado com sucesso!');
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_)=> PageViewManager()));
+
 
 
     } on FirebaseAuthException catch (e) {
@@ -138,7 +155,8 @@ class UserManager extends ChangeNotifier {
     
   }
 
-  Future<void> loadAllRequests() async {
+  Future<void> loadAllRequests(UserProfile user) async {
+      await user.saveData();
     
   }
 }

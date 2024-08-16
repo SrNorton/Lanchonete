@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:lanchonete_app/components/buttom.dart';
-import 'package:lanchonete_app/components/buttonManager.dart';
 import 'package:lanchonete_app/components/cardSavoryManager.dart';
-import 'package:lanchonete_app/components/savoryCard.dart';
 import 'package:lanchonete_app/constants/constants.dart';
+import 'package:lanchonete_app/manager/appManager.dart';
+import 'package:lanchonete_app/manager/userManager.dart';
+import 'package:lanchonete_app/models/savory.dart';
+import 'package:lanchonete_app/models/userProfile.dart';
+import 'package:provider/provider.dart';
 
 class StoveManagerScreen extends StatefulWidget {
   const StoveManagerScreen({super.key});
@@ -15,6 +18,8 @@ class StoveManagerScreen extends StatefulWidget {
 class _StoveManagerScreenState extends State<StoveManagerScreen> {
   @override
   Widget build(BuildContext context) {
+    
+
     return Scaffold(
       appBar: AppBar( 
         title: Text( 
@@ -28,13 +33,16 @@ class _StoveManagerScreenState extends State<StoveManagerScreen> {
         centerTitle: false,
       ),
 
-      body: Column( 
+      body: Consumer<AppManager>(
+        builder: (_, appmanager,__){
+            return Column( 
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [ 
           SizedBox(height: 120,),
         Padding(
           padding: const EdgeInsets.only(left: 16, right: 16, bottom: 40),
-          child: Container(
+          child: 
+              Container(
             height: 480,
             width: 400,
             child: GridView.builder(
@@ -45,19 +53,35 @@ class _StoveManagerScreenState extends State<StoveManagerScreen> {
                 mainAxisSpacing: 50
                 ),
                 itemCount: listCardSavoryManager.length,
-               itemBuilder: (BuildContext context, int index){
-                return CardSavoryManager(
+               itemBuilder: (context, index) {
+                 return   CardSavoryManager(
+                  
+                  id: listCardSavoryManager[index].id,
                   image: listCardSavoryManager[index].image,
                   description: listCardSavoryManager[index].description,
-                  select: listCardSavoryManager[index].select,
+                  price: listCardSavoryManager[index].price,
+                  
                 );
-               }
+               },
+              
+               
+                
+               
                ),
           ),
+            
         ),
-        Buttom(title: 'ATUALIZAR', function: (){}, color: Colors.red)
+        // Buttom(
+        //   title:'ATUALIZAR', function: () async {
+           
+            
+        // }, color: Colors.red)
+       
         ],
-      ),
+      );
+        }
+        )
     );
   }
 }
+

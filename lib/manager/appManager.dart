@@ -1,17 +1,27 @@
+
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:lanchonete_app/models/notices.dart';
+import 'package:lanchonete_app/models/savory.dart';
 
 class AppManager extends ChangeNotifier{ 
 
   AppManager(){
     _readNotices();
+    
   }
 
 
   String? notices;
 
+  bool? loadingAppManager;
+  Savory? savory;
+
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+  
+
 
 
   Future<void> createNotices(String mensage) async { 
@@ -33,5 +43,42 @@ class AppManager extends ChangeNotifier{
      });
      notifyListeners();
   }
+
+
+   
+
+  
+
+
+  Future<void> deleteItemStove(String itemId) async {
+    try {
+      await firestore.collection('stove').doc(itemId).delete();
+      
+    } catch (e) {
+      print('ocorreu um problema $e');
+      
+    }
+  }
+
+
+  Future<void> insertItemStove({required Savory savory}) async {
+    loadingAppManager = true;
+     
+     
+           try {
+      await savory.saveData();
+      print('sucesso');
+    } catch (e) {
+      print('ocorreu um problema $e');
+    }
+      
+    loadingAppManager = false;
+  
+  
+   
+  }
+
+ 
+
 
 }

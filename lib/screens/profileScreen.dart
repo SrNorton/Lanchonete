@@ -71,6 +71,19 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
               ),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: TextButton.icon(
+                  onPressed: (){
+                    usermanager.signOut(context);
+                  } ,
+                   icon: Icon(Icons.store_mall_directory_rounded),
+                    label: Text( 'Sair',
+                     style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      ),))
+              )
             ],
           );
         }),
