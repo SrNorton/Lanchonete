@@ -1,8 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:lanchonete_app/components/prepareCard.dart';
 import 'package:lanchonete_app/components/savoryCard.dart';
 import 'package:lanchonete_app/constants/constants.dart';
 import 'package:lanchonete_app/manager/appManager.dart';
+import 'package:lanchonete_app/models/savory.dart';
 import 'package:provider/provider.dart';
 
 class SavoryScreen extends StatelessWidget {
@@ -10,8 +12,18 @@ class SavoryScreen extends StatelessWidget {
     super.key,
   });
 
+  
+
   @override
   Widget build(BuildContext context) {
+
+
+
+
+   
+
+   
+
     return Column(
       children: [
       
@@ -46,16 +58,7 @@ class SavoryScreen extends StatelessWidget {
                 SizedBox(height: 30,),
                     SizedBox(
                       height: 162,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: listSavory.length,
-                        itemBuilder: (context, index){
-                          return SavoryCard(
-                            image: listSavory[index].image, 
-                            title: listSavory[index].title,
-                            price: listSavory[index].price,
-                            );
-                        }),
+                      child: _buildSavorylist()
                     )
             ],
           ),
@@ -108,7 +111,52 @@ class SavoryScreen extends StatelessWidget {
           ),
       ],
       
+      
     );
+
+    
   }
+    Widget _buildSavorylist(){
+
+          final FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+
+    Stream<QuerySnapshot> stoveStream = firestore.collection('stove').snapshots();
+
+
+    return StreamBuilder(
+      stream: stoveStream,
+       builder: (context, snapshot){
+        if(snapshot.hasError){
+          return const Text('Error');
+        }
+        if(snapshot.connectionState == ConnectionState.waiting){
+          return CircularProgressIndicator(
+            color: ktextGreen,
+          );
+        }
+
+        final List<Savory> savoryList = snapshot.data!.docs.map((DocumentSnapshot document) {
+        // Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
+        return Savory.fromDocument(document);
+      }).toList();
+
+        return  ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: savoryList.length,
+                        itemBuilder: (context, index){
+                          return SavoryCard(
+                            image: savoryList[index].image!,
+                            title: savoryList[index].description!,
+                            price: savoryList[index].price!,
+                            );
+                        });
+          
+         
+        
+       },
+       );
+  }
+  
 }
 

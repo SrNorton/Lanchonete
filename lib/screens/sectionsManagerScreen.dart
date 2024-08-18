@@ -38,7 +38,7 @@ class _SectionsManagerScreenState extends State<SectionsManagerScreen> {
           ButtonSectionManager(
             title: 'Estufa',
             function: () async {
-              Navigator.of(context).push(MaterialPageRoute(builder: (_)=> StoveManagerScreen()));
+              Navigator.of(context).push(MaterialPageRoute(builder: (context)=> StoveManagerScreen()));
             },
           ),
         ],
