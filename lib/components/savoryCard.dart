@@ -44,13 +44,14 @@ class SavoryCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(top: 10, right: 5),
+                    padding: const EdgeInsets.only(top: 10, right: 8, left: 5),
                     child: Text(title,
                     softWrap: true,
                     style: TextStyle(
                       fontSize: 20,
                                       fontFamily: kfontFamily,
                                       color: Colors.green,
+                                      fontWeight: FontWeight.bold
                     
                     ),
                     ),

@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:lanchonete_app/constants/constants.dart';
 
 class PrepareCard extends StatelessWidget {
 
   final String image;
   final double width;
+  final VoidCallback function;
   PrepareCard({
     required this.image,
     required this.width,
+    required this.function,
     super.key,
   });
 
@@ -18,23 +21,26 @@ class PrepareCard extends StatelessWidget {
       child: Row(
        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-           height: 55,
-           width: 140,
-           child: Center(
-             child: Text('Preparar',
-             style: TextStyle(
-               fontFamily: kfontFamily,
-               color: Colors.white,
-               fontSize: 22,
-               fontWeight: FontWeight.bold
+          GestureDetector(
+            onTap: function,
+            child: Container(
+             height: 55,
+             width: 140,
+             child: Center(
+               child: Text('Preparar',
+               style: TextStyle(
+                 fontFamily: kfontFamily,
+                 color: Colors.white,
+                 fontSize: 22,
+                 fontWeight: FontWeight.bold
+               ),
+               ),
              ),
+             decoration: BoxDecoration(
+               color: KbuttomColor,
+               borderRadius: BorderRadius.circular(35),
              ),
-           ),
-           decoration: BoxDecoration(
-             color: KbuttomColor,
-             borderRadius: BorderRadius.circular(35),
-           ),
+            ),
           ),
           Expanded(
             child: Column(
