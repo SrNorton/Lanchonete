@@ -2,6 +2,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:lanchonete_app/manager/appManager.dart';
+import 'package:lanchonete_app/manager/bagManager.dart';
 import 'package:lanchonete_app/manager/userManager.dart';
 import 'package:lanchonete_app/screens/homeScreen.dart';
 
@@ -38,7 +39,10 @@ class MyApp extends StatelessWidget {
             create: (_)=> AppManager(),
             lazy: false,
             ),
-       
+          ChangeNotifierProvider(
+            create: (_)=> BagManager(),
+            lazy: false,
+            )
        
          
       ],

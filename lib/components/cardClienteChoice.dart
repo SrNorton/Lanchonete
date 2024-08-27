@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:lanchonete_app/helpers/statusMessage.dart';
+import 'package:lanchonete_app/Utils/statusMessage.dart';
+import 'package:lanchonete_app/components/bagCart.dart';
+import 'package:lanchonete_app/manager/bagManager.dart';
 import 'package:lanchonete_app/models/savory.dart';
+import 'package:provider/provider.dart';
 
 class CardClientChoice extends StatefulWidget {
   
@@ -29,7 +32,7 @@ class CardClientChoice extends StatefulWidget {
 class _CardSavoryManagerState extends State<CardClientChoice> {
   bool select = false;
 
-    OverlayEntry?  _overlayEntry;
+    
  
 
 
@@ -48,19 +51,19 @@ class _CardSavoryManagerState extends State<CardClientChoice> {
      
       });
      
-       var itemSavory = Savory(
+       var item = BagCart(
         
-        id : this.widget.id,
+        
         image : this.widget.image,
-        price : this.widget.price,
-        description: this.widget.description,
-        selectSavory: select,
+        price : this.widget.price.toString(),
+        name: this.widget.description,
+        
       );
 
       if(select){
         StatusMessage(statusSucces: true).showMySnackBar(
         context: context, msg: 'Adicionado à sacola');
-        
+        context.read<BagManager>().addToBag(item);
      
       } else {
         

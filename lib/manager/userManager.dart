@@ -7,8 +7,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter/widgets.dart';
-import 'package:lanchonete_app/helpers/firebase_errors.dart';
-import 'package:lanchonete_app/helpers/statusMessage.dart';
+import 'package:lanchonete_app/Utils/firebase_errors.dart';
+import 'package:lanchonete_app/Utils/statusMessage.dart';
 import 'package:lanchonete_app/models/door.dart';
 import 'package:lanchonete_app/models/userProfile.dart';
 import 'package:lanchonete_app/screens/loginScreen.dart';

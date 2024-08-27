@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lanchonete_app/components/buttom.dart';
 import 'package:lanchonete_app/constants/constants.dart';
-import 'package:lanchonete_app/helpers/validators.dart';
+import 'package:lanchonete_app/Utils/validators.dart';
 import 'package:lanchonete_app/manager/userManager.dart';
 import 'package:lanchonete_app/models/userProfile.dart';
 import 'package:provider/provider.dart';
