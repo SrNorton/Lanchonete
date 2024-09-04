@@ -8,7 +8,7 @@ class CardSavoryManager extends StatefulWidget {
   
   String? id;
   String? image;
-  double? price;
+  double price;
   String? description;
  
   
@@ -16,7 +16,7 @@ class CardSavoryManager extends StatefulWidget {
     
     this.id,
     this.image,
-    this.price,
+    required this.price,
     this.description,
    
     

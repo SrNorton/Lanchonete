@@ -9,7 +9,7 @@ class CardClientChoice extends StatefulWidget {
   
   final String? id;
   final String? image;
-  final double? price;
+  final double price;
   final String? description;
   
  
@@ -18,7 +18,7 @@ class CardClientChoice extends StatefulWidget {
     
     this.id,
     this.image,
-    this.price,
+    required this.price,
     this.description,
     
    
@@ -53,9 +53,9 @@ class _CardSavoryManagerState extends State<CardClientChoice> {
      
        var item = BagCart(
         
-        
+        id: this.widget.id,
         image : this.widget.image,
-        price : this.widget.price.toString(),
+        price : this.widget.price,
         name: this.widget.description,
         
       );

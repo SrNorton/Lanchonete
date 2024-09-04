@@ -5,7 +5,7 @@ class JuiceCard extends StatelessWidget {
   final String? id;
   final String name;
   final String image;
-  final double? price;
+  final double price;
   final String? description;
   
   
@@ -13,7 +13,7 @@ class JuiceCard extends StatelessWidget {
     this.id,
     required this.name,
     required this.image,
-    this.price,
+    required this.price,
     this.description,
     super.key,
   });

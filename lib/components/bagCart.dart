@@ -1,16 +1,22 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:lanchonete_app/constants/constants.dart';
+import 'package:lanchonete_app/manager/bagManager.dart';
+import 'package:provider/provider.dart';
 
 class BagCart extends StatefulWidget {
 
+  String? id;
   String? name;
   String? image;
   String? time;
-  String? price;
+  double price;
+  
   
 
    BagCart({
-    this.name, this.image, this.time, this.price, 
+    this.id, this.name, this.image, this.time,required this.price,
     super.key,
   });
 
@@ -67,29 +73,59 @@ class _BagCartState extends State<BagCart> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Container(
-                          height: 30,
-                          width: 30,
+                          height: 25,
+                          width: 25,
                           child: Image.asset('assets/images/clock.png'),
                         ),
-                        Text('15:30',
-                        style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black
-                        ),
+                        SizedBox(width: 8,),
+                        
+                        GestureDetector(
+                          onTap: (){
+                            showDialog(context: context,
+                            barrierDismissible: false,
+                             builder: (BuildContext context){
+                              
+                              return Container(
+                                child: AlertDialog( 
+                                  title:  Text('Escolha o horário para lanchar',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black
+                          ),
+                          ),  
+                                ),
+                              );
+                             });
+                          },
+                          child: Text('Escolha seu horário',
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black
+                          ),
+                          ),
                         ),
                       
                       ],
                     ),
-                      SizedBox(height: 50,),
-                        Text('Pedido Aceito',
-                        style: TextStyle( 
-                          fontFamily: kfontFamily,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          color: Colors.black
+                      SizedBox(height: 24,),
+                     
+                        GestureDetector(
+                          onTap: (){
+                            context.read<BagManager>().removeFromBag(widget.id!);
+                          },
+                          child: 
+                          Text('Remover item',
+                          style: TextStyle( 
+                            fontFamily: kfontFamily,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Colors.red
+                          ),
+                          ),
                         ),
-                        )
+                        
                   ],
                 ),
               )),

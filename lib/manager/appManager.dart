@@ -126,6 +126,8 @@ class AppManager extends ChangeNotifier{
                     id: listJuice[index].id,
                     image: listJuice[index].image,
                     description: listJuice[index].description,
+                    price: listJuice[index].price,
+
                   );
                                  },
                                 

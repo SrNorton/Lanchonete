@@ -40,6 +40,7 @@ class _BagScreenState extends State<BagScreen> {
               itemCount: bagManager.listiItems.length,
               itemBuilder: (context, index){
                 return BagCart(
+                  id: bagManager.listiItems[index].id,
                   name: bagManager.listiItems[index].name,
                   image: bagManager.listiItems[index].image,
                   price: bagManager.listiItems[index].price,
@@ -58,7 +59,7 @@ class _BagScreenState extends State<BagScreen> {
             
                     ),
                     child: Center(
-            child: Text('Pagar Pix R\$ 10.00',
+            child: Text('Pagar Pix  R\$ ${bagManager.somarPrices() ?? '0.0'}',
             style: TextStyle( 
               color: Colors.white,
               fontSize: 20,

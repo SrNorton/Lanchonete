@@ -6,11 +6,11 @@ class Savory{
   String? id;
   String? image;
   String? description;
-  double? price;
+  double price = 0;
   bool? selectSavory = false;
 
 
-  Savory({this.id, this.image, this.description, this.price, this.selectSavory});
+  Savory({this.id, this.image, this.description,required this.price, this.selectSavory});
 
 
  

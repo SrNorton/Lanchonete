@@ -55,7 +55,11 @@ class _JuiceScreenState extends State<JuiceScreen> {
                     itemCount: listJuice.length,
                     itemBuilder: (context, index){
                       return 
-                      JuiceCard(name: listJuice[index].name, image: listJuice[index].image);
+                      JuiceCard(
+                        name: listJuice[index].name,
+                         image: listJuice[index].image,
+                         price: listJuice[index].price,
+                         );
                     }),
                 )
                   
@@ -116,6 +120,8 @@ class _JuiceScreenState extends State<JuiceScreen> {
                     
                     id: listJuice[index].id,
                     image: listJuice[index].image,
+                    price: listJuice[index].price,
+
                     
                     
                     
