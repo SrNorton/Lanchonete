@@ -2,9 +2,11 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:lanchonete_app/Utils/statusMessage.dart';
 import 'package:lanchonete_app/components/cardClienteChoice.dart';
 import 'package:lanchonete_app/components/juiceCard.dart';
 import 'package:lanchonete_app/constants/constants.dart';
+import 'package:lanchonete_app/models/juice.dart';
 import 'package:lanchonete_app/models/notices.dart';
 import 'package:lanchonete_app/models/savory.dart';
 
@@ -27,9 +29,12 @@ class AppManager extends ChangeNotifier{
 
 
 
-  Future<void> createNotices(String mensage) async { 
+  Future<void> createNotices(String mensage, BuildContext context) async { 
     try {
-    await firestore.collection('notices').doc('U3iyDQjawnnLUV6rNU86').update({mensage : mensage});
+    await firestore.collection('notices').doc('U3iyDQjawnnLUV6rNU86').update({'mensage' : mensage});
+
+    StatusMessage(statusSucces: true).showMySnackBar(context: context, msg: 'Aviso atualizado!');
+
       
     } catch (e) {
       print('Erro na classe AppManager $e');
@@ -80,6 +85,38 @@ class AppManager extends ChangeNotifier{
   
    
   }
+
+  
+
+  //juice
+   Future<void> insertItemJuice({required Juice juice, required }) async {
+    loadingAppManager = true;
+     
+     
+           try {
+      await juice.saveData();
+      print('sucesso');
+    } catch (e) {
+      print('ocorreu um problema $e');
+    }
+      
+    loadingAppManager = false;
+  
+  
+   
+  }
+
+  Future<void> deleteJuice(String itemId) async {
+    try {
+      await firestore.collection('juice').doc(itemId).delete();
+      
+    } catch (e) {
+      print('ocorreu um problema $e');
+      
+    }
+  }
+
+
 
 
   openSavoryModalbottom(BuildContext context, bool savory){

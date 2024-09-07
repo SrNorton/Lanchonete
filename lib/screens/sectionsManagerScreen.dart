@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lanchonete_app/components/buttomSectionManager.dart';
 import 'package:lanchonete_app/constants/constants.dart';
+import 'package:lanchonete_app/screens/juiceManagerScreen.dart';
 import 'package:lanchonete_app/screens/stoveManagerScreen.dart';
 
 class SectionsManagerScreen extends StatefulWidget {
@@ -30,11 +31,12 @@ class _SectionsManagerScreenState extends State<SectionsManagerScreen> {
         children: [ 
           SizedBox(height: 100,),
           ButtonSectionManager(
-            title: 'Sucos disponiveis'
+            title: 'Sucos disponiveis',
+              function: () async {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context)=> JuiceManagerScreen()));
+            },
           ),
-          ButtonSectionManager(
-            title: 'Salgados disponiveis',
-          ),
+        
           ButtonSectionManager(
             title: 'Estufa',
             function: () async {

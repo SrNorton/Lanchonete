@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:lanchonete_app/components/editHours.dart';
+import 'package:lanchonete_app/components/editMinutes.dart';
 import 'package:lanchonete_app/constants/constants.dart';
 import 'package:lanchonete_app/manager/bagManager.dart';
 import 'package:provider/provider.dart';
@@ -94,6 +96,29 @@ class _BagCartState extends State<BagCart> {
                                   color: Colors.black
                           ),
                           ),  
+                          actions: [ 
+                            EditHours(),
+                            SizedBox(height: 15,),
+                            EditMinutes(),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [ 
+                                GestureDetector(
+                                  onTap: (){
+                                     Navigator.pop(context);
+                                  },
+                                  child: Text('OK',
+                                  style: TextStyle(
+                                    fontSize: 25,
+                                    color: Colors.blue
+                                  ),
+                                  ),
+                                ),
+                               
+                              ],
+                            ),
+                            
+                          ],
                                 ),
                               );
                              });
@@ -102,7 +127,7 @@ class _BagCartState extends State<BagCart> {
                           style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.bold,
-                            color: Colors.black
+                            color: Colors.blue
                           ),
                           ),
                         ),

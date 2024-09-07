@@ -7,7 +7,7 @@ class BagManager extends ChangeNotifier{
 
   
   
-  int _inithours = 0;
+  int _inithours = 5;
   int _initMinutes =0;
 
   int get hours {

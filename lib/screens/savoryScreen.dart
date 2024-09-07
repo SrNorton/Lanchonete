@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:lanchonete_app/components/cardClienteChoice.dart';
-import 'package:lanchonete_app/components/cardSavoryManager.dart';
 import 'package:lanchonete_app/components/prepareCard.dart';
 import 'package:lanchonete_app/components/savoryCard.dart';
 import 'package:lanchonete_app/constants/constants.dart';
@@ -154,7 +152,7 @@ class SavoryScreen extends StatelessWidget {
                           return SavoryCard(
                             image: savoryList[index].image!,
                             title: savoryList[index].description!,
-                            price: savoryList[index].price!,
+                            price: savoryList[index].price,
                             );
                         });
           

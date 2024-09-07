@@ -7,6 +7,7 @@ import 'package:lanchonete_app/manager/userManager.dart';
 import 'package:lanchonete_app/screens/homeScreen.dart';
 
 import 'package:lanchonete_app/screens/loginScreen.dart';
+import 'package:lanchonete_app/screens/noticesScreen.dart';
 import 'package:lanchonete_app/screens/stoveManagerScreen.dart';
 
 import 'package:provider/provider.dart';
@@ -55,7 +56,7 @@ class MyApp extends StatelessWidget {
           
           useMaterial3: true,
         ),
-        home: HomeScreen(),
+        home: LoginScreen(),
       ),
     );
   }

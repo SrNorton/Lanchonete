@@ -1,26 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:lanchonete_app/components/cardSavoryManager.dart';
+import 'package:lanchonete_app/components/cardJuiceManager.dart';
+import 'package:lanchonete_app/components/juiceCard.dart';
 import 'package:lanchonete_app/constants/constants.dart';
 import 'package:lanchonete_app/manager/appManager.dart';
-import 'package:lanchonete_app/models/savory.dart';
 import 'package:provider/provider.dart';
 
-class StoveManagerScreen extends StatefulWidget {
-  const StoveManagerScreen({super.key});
+class JuiceManagerScreen extends StatefulWidget {
+  const JuiceManagerScreen({super.key});
 
   @override
-  State<StoveManagerScreen> createState() => _StoveManagerScreenState();
+  State<JuiceManagerScreen> createState() => _JuiceManagerScreenState();
 }
 
-class _StoveManagerScreenState extends State<StoveManagerScreen> {
+class _JuiceManagerScreenState extends State<JuiceManagerScreen> {
   @override
   Widget build(BuildContext context) {
-    
-
     return Scaffold(
       appBar: AppBar( 
         title: Text( 
-          'Gerencie a estufa',
+          'Gerencie as bebidas',
           style: TextStyle( 
             fontSize: 26,
             fontFamily: kfontFamily,
@@ -49,14 +47,14 @@ class _StoveManagerScreenState extends State<StoveManagerScreen> {
                 childAspectRatio: 0.9, 
                 mainAxisSpacing: 50
                 ),
-                itemCount: listCardSavoryManager.length,
+                itemCount: listJuice.length,
                itemBuilder: (context, index) {
-                 return   CardSavoryManager(
+                 return   CardJuiceManager(
                   
-                  id: listCardSavoryManager[index].id,
-                  image: listCardSavoryManager[index].image,
-                  description: listCardSavoryManager[index].description,
-                  price: listCardSavoryManager[index].price,
+                  id: listJuice[index].id,
+                  image: listJuice[index].image,
+                  description: listJuice[index].description,
+                  price: listJuice[index].price,
                   
                 );
                },
@@ -81,4 +79,3 @@ class _StoveManagerScreenState extends State<StoveManagerScreen> {
     );
   }
 }
-

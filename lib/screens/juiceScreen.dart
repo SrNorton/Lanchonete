@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -7,6 +8,7 @@ import 'package:lanchonete_app/components/juiceCard.dart';
 import 'package:lanchonete_app/components/prepareCard.dart';
 import 'package:lanchonete_app/constants/constants.dart';
 import 'package:lanchonete_app/manager/appManager.dart';
+import 'package:lanchonete_app/models/juice.dart';
 import 'package:provider/provider.dart';
 
 class JuiceScreen extends StatefulWidget {
@@ -49,19 +51,10 @@ class _JuiceScreenState extends State<JuiceScreen> {
                 ),
               ),
                 SizedBox(height: 30,),
-                Expanded(
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: listJuice.length,
-                    itemBuilder: (context, index){
-                      return 
-                      JuiceCard(
-                        name: listJuice[index].name,
-                         image: listJuice[index].image,
-                         price: listJuice[index].price,
-                         );
-                    }),
-                )
+                SizedBox(
+                      height: 162,
+                      child: _builJuicelist()
+                    )
                   
             ],
           ),
@@ -141,5 +134,50 @@ class _JuiceScreenState extends State<JuiceScreen> {
           );
     });
   }
+
+
+   Widget _builJuicelist(){
+
+          final FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+
+    Stream<QuerySnapshot> stoveStream = firestore.collection('juice').snapshots();
+
+
+    return StreamBuilder(
+      stream: stoveStream,
+       builder: (context, snapshot){
+        if(snapshot.hasError){
+          return const Text('Error');
+        }
+        if(snapshot.connectionState == ConnectionState.waiting){
+          return CircularProgressIndicator(
+            color: ktextGreen,
+          );
+        }
+
+        final List<Juice> juiceList = snapshot.data!.docs.map((DocumentSnapshot document) {
+        // Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
+        return 
+        Juice.fromDocument(document);
+      }).toList();
+
+        return  ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: juiceList.length,
+                        itemBuilder: (context, index){
+                          return JuiceCard(
+                            image: juiceList[index].image!,
+                            name: juiceList[index].description!,
+                            price: juiceList[index].price!,
+                            );
+                        });
+          
+         
+        
+       },
+       );
+  }
+
 }
 
