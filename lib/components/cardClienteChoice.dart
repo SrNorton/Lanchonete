@@ -57,7 +57,7 @@ class _CardSavoryManagerState extends State<CardClientChoice> {
         image : this.widget.image,
         price : this.widget.price,
         name: this.widget.description,
-        
+        quantity: 1,
       );
 
       if(select){

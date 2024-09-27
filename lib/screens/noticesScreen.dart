@@ -72,7 +72,7 @@ class _NoticesScreenState extends State<NoticesScreen> {
             ButtonSaveNotices(
               function: () async {
                 if(_formKey.currentState!.validate()){
-                context.read<AppManager>().createNotices(_textNoticesController.text, context);
+               await context.read<AppManager>().createNotices(_textNoticesController.text, context);
 
                 }
                 _textNoticesController.clear();

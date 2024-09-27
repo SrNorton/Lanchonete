@@ -1,21 +1,29 @@
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:lanchonete_app/manager/appManager.dart';
 import 'package:lanchonete_app/manager/bagManager.dart';
+import 'package:lanchonete_app/manager/paymentManager.dart';
 import 'package:lanchonete_app/manager/userManager.dart';
+import 'package:lanchonete_app/screens/bagScreen.dart';
 import 'package:lanchonete_app/screens/homeScreen.dart';
 
 import 'package:lanchonete_app/screens/loginScreen.dart';
 import 'package:lanchonete_app/screens/noticesScreen.dart';
+import 'package:lanchonete_app/screens/pageView.dart';
+import 'package:lanchonete_app/screens/qrCodeScreen.dart';
 import 'package:lanchonete_app/screens/stoveManagerScreen.dart';
 
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
+
+await dotenv.load(fileName: ".env",);
 WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-
+   
+  
   runApp(const MyApp());
 
 
@@ -42,6 +50,10 @@ class MyApp extends StatelessWidget {
             ),
           ChangeNotifierProvider(
             create: (_)=> BagManager(),
+            lazy: false,
+            ),
+          ChangeNotifierProvider(
+            create: (_)=> MercadoPagoService(),
             lazy: false,
             )
        

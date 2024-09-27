@@ -40,7 +40,14 @@ class BagManager extends ChangeNotifier{
   }
 
   void addToBag(BagCart items){
-    listiItems.add(items);
+    int indice = listiItems.indexWhere((produto) => produto.id == items.id);
+
+    if(indice != -1){
+      listiItems[indice].quantity++;
+    } else {
+      listiItems.add(items);
+    }
+    
     somarPrices();
   }
 
@@ -53,15 +60,28 @@ class BagManager extends ChangeNotifier{
     double total = 0;
     
     listiItems.forEach((e) {
-      total += e.price;
+      total += e.price * e.quantity;
       
      });
      notifyListeners();
     return total.toString();
   }
 
-  void totalBag(){
-    double total = 0;
+  void addQuantity(String id){
+    var indice = listiItems.indexWhere((e) => e.id == id);
+    if(indice != -1){
+      listiItems[indice].quantity++;
+      
+    }
+    notifyListeners();
   }
 
+  void removeQuantity(String id){
+    var indice = listiItems.indexWhere((e) => e.id == id);
+    if(indice != -1 && listiItems[indice].quantity > 1){
+      listiItems[indice].quantity--;
+    }
+    notifyListeners();
+
+  }
 }

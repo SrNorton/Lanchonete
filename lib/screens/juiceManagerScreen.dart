@@ -53,7 +53,7 @@ class _JuiceManagerScreenState extends State<JuiceManagerScreen> {
                   
                   id: listJuice[index].id,
                   image: listJuice[index].image,
-                  description: listJuice[index].description,
+                  description: listJuice[index].name,
                   price: listJuice[index].price,
                   
                 );

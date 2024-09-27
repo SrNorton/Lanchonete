@@ -14,11 +14,12 @@ class BagCart extends StatefulWidget {
   String? image;
   String? time;
   double price;
+  int quantity;
   
   
 
    BagCart({
-    this.id, this.name, this.image, this.time,required this.price,
+    this.id, this.name, this.image, this.time,required this.price, required this.quantity,
     super.key,
   });
 
@@ -123,7 +124,7 @@ class _BagCartState extends State<BagCart> {
                               );
                              });
                           },
-                          child: Text('Escolha seu horário',
+                          child: Text('Escolher horário',
                           style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.bold,
@@ -153,7 +154,29 @@ class _BagCartState extends State<BagCart> {
                         
                   ],
                 ),
+              
               )),
+                Padding(
+                  padding: const EdgeInsets.only(right: 12, left: 8),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                    IconButton(icon: Icon(Icons.add_circle, color: Colors.blue,), onPressed: () { 
+                      context.read<BagManager>().addQuantity(widget.id!);
+                     },),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 15, bottom: 15),
+                      child: Text(widget.quantity.toString(),
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
+                      ),
+                    ),
+                   IconButton(icon: Icon(Icons.remove_circle,color: Colors.blue,), onPressed: () {
+                     context.read<BagManager>().removeQuantity(widget.id!);
+                   },),
+                  ],),
+                )
           ],
         ),
       ),

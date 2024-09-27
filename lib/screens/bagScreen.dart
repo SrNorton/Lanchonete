@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:lanchonete_app/components/bagCart.dart';
 import 'package:lanchonete_app/constants/constants.dart';
 import 'package:lanchonete_app/manager/bagManager.dart';
+import 'package:lanchonete_app/manager/paymentManager.dart';
+import 'package:lanchonete_app/screens/qrCodeScreen.dart';
 import 'package:provider/provider.dart';
 
 class BagScreen extends StatefulWidget {
@@ -14,6 +16,9 @@ class BagScreen extends StatefulWidget {
 class _BagScreenState extends State<BagScreen> {
   @override
   Widget build(BuildContext context) {
+
+    
+
     return Scaffold(
       appBar: AppBar( 
         title: Text( 
@@ -44,31 +49,38 @@ class _BagScreenState extends State<BagScreen> {
                   name: bagManager.listiItems[index].name,
                   image: bagManager.listiItems[index].image,
                   price: bagManager.listiItems[index].price,
+                  quantity: bagManager.listiItems[index].quantity,
                 );
               })
           ),
          
           Padding(
             padding: const EdgeInsets.only(top: 100),
-            child: Container(
-                    height: 85,
-                    width: MediaQuery.of(context).size.width - 45,
-                    decoration: BoxDecoration( 
-            borderRadius: BorderRadius.circular(50),
-            color: kRedButtonColor,
-            
+            child: GestureDetector(
+              onTap: () async {
+                await context.read<MercadoPagoService>().criarPagamento(100);
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => QrCodeScreen()));
+              },
+              child: Container(
+                      height: 85,
+                      width: MediaQuery.of(context).size.width - 45,
+                      decoration: BoxDecoration( 
+              borderRadius: BorderRadius.circular(50),
+              color: kRedButtonColor,
+              
+                      ),
+                      child: Center(
+              child: Text('Pagar Pix  R\$ ${bagManager.somarPrices() ?? '0.0'}',
+              style: TextStyle( 
+                color: Colors.white,
+                fontSize: 20,
+                fontFamily: kfontFamily,
+                fontWeight: FontWeight.bold,
+              ),
+              ),
+                      ),
                     ),
-                    child: Center(
-            child: Text('Pagar Pix  R\$ ${bagManager.somarPrices() ?? '0.0'}',
-            style: TextStyle( 
-              color: Colors.white,
-              fontSize: 20,
-              fontFamily: kfontFamily,
-              fontWeight: FontWeight.bold,
             ),
-            ),
-                    ),
-                  ),
           ),
         ],
       );

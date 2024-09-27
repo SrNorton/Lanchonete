@@ -5,6 +5,7 @@ import 'package:lanchonete_app/Utils/validators.dart';
 import 'package:lanchonete_app/manager/userManager.dart';
 import 'package:lanchonete_app/models/userProfile.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 
 class RegisterScreen extends StatelessWidget {
   
@@ -14,7 +15,7 @@ class RegisterScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
     
     final TextEditingController _nameController = TextEditingController();
-    final TextEditingController _phoneController = TextEditingController();
+    var _phoneController = new MaskedTextController(mask: '(00)000000000');
     final TextEditingController _emailController = TextEditingController();
     final TextEditingController _passController = TextEditingController();
     final TextEditingController _confirmController = TextEditingController();

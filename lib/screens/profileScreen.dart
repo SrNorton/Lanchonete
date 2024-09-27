@@ -7,6 +7,7 @@ import 'package:lanchonete_app/components/buttonManager.dart';
 import 'package:lanchonete_app/components/savoryCard.dart';
 import 'package:lanchonete_app/constants/constants.dart';
 import 'package:lanchonete_app/manager/userManager.dart';
+import 'package:lanchonete_app/screens/noticesScreen.dart';
 import 'package:lanchonete_app/screens/sectionsManagerScreen.dart';
 import 'package:provider/provider.dart';
 
@@ -66,6 +67,9 @@ class ProfileScreen extends StatelessWidget {
                       ),
                       ButtonManager(
                         image: 'assets/images/megaphone.png',
+                        function: ()async{
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => NoticesScreen()));
+                        },
                       )
                     ],
                   ),
