@@ -1,10 +1,7 @@
 
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:lanchonete_app/components/buttonManager.dart';
-import 'package:lanchonete_app/components/savoryCard.dart';
 import 'package:lanchonete_app/constants/constants.dart';
 import 'package:lanchonete_app/manager/userManager.dart';
 import 'package:lanchonete_app/screens/noticesScreen.dart';
@@ -19,9 +16,7 @@ class ProfileScreen extends StatelessWidget {
 
     
 
-    openDor(){
-      context.read<UserManager>().openDoor();
-    }
+   
 
 
     return Scaffold(
@@ -41,23 +36,20 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 110,
-              // child: Text(usermanager.isOpen! ? 'Você abriu a lanchonete' : 'Você fechou a lanchonete',
-              // style: TextStyle( 
-              //   color: usermanager.isOpen! ? ktextGreen : Colors.red,
-              //   fontSize: 18,
-              // ),
-              // ),
+         
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 14),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   height: 130,
-                  child: Row(
+                  child: usermanager.user!.isAdmin! ? Row(
                     children: [ 
                       ButtonManager( 
                         image: 'assets/images/door.png',
-                        function: openDor(),
+                        function: () async {
+                          usermanager.openDoor();
+                        },
                       ),
                       ButtonManager(
                         image: 'assets/images/tasks.png',
@@ -72,6 +64,27 @@ class ProfileScreen extends StatelessWidget {
                         },
                       )
                     ],
+                  ) : Container(
+                     width: MediaQuery.of(context).size.width,
+                  height: 130,
+                  child: Column( 
+                    children: [ 
+                      Text(usermanager.user!.email!,
+                      style: TextStyle(
+                        fontFamily: kfontFamily,
+                        fontSize: 18,
+                        color: Colors.blue,
+                      ),
+                      ),
+                       Text(usermanager.user!.phone!,
+                      style: TextStyle(
+                        fontFamily: kfontFamily,
+                        fontSize: 18,
+                        color: Colors.blue,
+                      ),
+                      ),
+                    ],
+                  ),
                   ),
                 ),
               ),

@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:lanchonete_app/components/editHours.dart';
 import 'package:lanchonete_app/components/editMinutes.dart';
 import 'package:lanchonete_app/constants/constants.dart';

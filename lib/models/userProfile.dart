@@ -9,9 +9,9 @@ class UserProfile {
    String? email;
    String? password;
    String? confirmPass;
-   bool? isAdmin;
+   bool isAdmin = false;
 
-  UserProfile({this.id, this.name,this.phone,this.email, this.password, this.confirmPass, this.isAdmin});
+  UserProfile({this.id, this.name,this.phone,this.email, this.password, this.confirmPass, required this.isAdmin});
 
   DocumentReference get firestoreRef => FirebaseFirestore.instance.doc('users/$id');
 

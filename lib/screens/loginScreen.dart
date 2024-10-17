@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:lanchonete_app/components/buttom.dart';
 import 'package:lanchonete_app/constants/constants.dart';
 import 'package:lanchonete_app/Utils/validators.dart';
@@ -77,7 +78,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only( right: 50, left: 50, bottom: 65),
+                      padding: const EdgeInsets.only( right: 50, left: 50, bottom: 25),
                       child: TextFormField(
                         enabled: !userManager.isLoading,
                         obscureText: true,
@@ -98,6 +99,18 @@ class LoginScreen extends StatelessWidget {
                           )
                         ),
                         
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.bottomRight,
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 30),
+                        child: TextButton(onPressed: (){}, child: Text('Esqueci minha senha!',
+                        style: TextStyle( 
+                          color: Colors.blue,
+                          fontSize: 10
+                        ),
+                        )),
                       ),
                     ),
                     userManager.isLoading ? CircularProgressIndicator(

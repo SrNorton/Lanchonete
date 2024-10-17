@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:lanchonete_app/Utils/statusMessage.dart';
 import 'package:lanchonete_app/components/bagCart.dart';
 import 'package:lanchonete_app/manager/bagManager.dart';
-import 'package:lanchonete_app/models/savory.dart';
 import 'package:provider/provider.dart';
 
 class CardClientChoice extends StatefulWidget {

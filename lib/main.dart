@@ -13,6 +13,7 @@ import 'package:lanchonete_app/screens/loginScreen.dart';
 import 'package:lanchonete_app/screens/noticesScreen.dart';
 import 'package:lanchonete_app/screens/pageView.dart';
 import 'package:lanchonete_app/screens/qrCodeScreen.dart';
+import 'package:lanchonete_app/screens/recoverPasswordScreen.dart';
 import 'package:lanchonete_app/screens/stoveManagerScreen.dart';
 
 import 'package:provider/provider.dart';

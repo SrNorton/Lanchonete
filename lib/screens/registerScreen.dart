@@ -216,6 +216,7 @@ class RegisterScreen extends StatelessWidget {
                             email: _emailController.text,
                             password: _passController.text,
                             confirmPass: _confirmController.text,
+                            isAdmin: false
                           );
                           usermanager.signUp(user: user, context: context);
                         }

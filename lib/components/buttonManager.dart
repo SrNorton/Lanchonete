@@ -1,10 +1,5 @@
-import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:lanchonete_app/manager/userManager.dart';
-import 'package:lanchonete_app/screens/sectionsManagerScreen.dart';
-import 'package:provider/provider.dart';
 
 class ButtonManager extends StatelessWidget {
   

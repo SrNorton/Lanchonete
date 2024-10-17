@@ -3,11 +3,16 @@ import 'package:lanchonete_app/constants/constants.dart';
 import 'package:lanchonete_app/manager/userManager.dart';
 import 'package:provider/provider.dart';
 
-class StatusDoor extends StatelessWidget {
+class StatusDoor extends StatefulWidget {
   const StatusDoor({
     super.key,
   });
 
+  @override
+  State<StatusDoor> createState() => _StatusDoorState();
+}
+
+class _StatusDoorState extends State<StatusDoor> {
   @override
   Widget build(BuildContext context) {
     return Consumer<UserManager>(

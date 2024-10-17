@@ -6,19 +6,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'package:flutter/widgets.dart';
 import 'package:lanchonete_app/Utils/firebase_errors.dart';
 import 'package:lanchonete_app/Utils/statusMessage.dart';
 import 'package:lanchonete_app/models/door.dart';
 import 'package:lanchonete_app/models/userProfile.dart';
 import 'package:lanchonete_app/screens/loginScreen.dart';
 import 'package:lanchonete_app/screens/pageView.dart';
-import 'package:provider/provider.dart';
 
 class UserManager extends ChangeNotifier {
 
-  UserManager(){
+  UserManager() {
     _loadCurrentUser();
+    checkStatusDoor();
   }
 
   final FirebaseAuth auth = FirebaseAuth.instance;
@@ -127,6 +126,19 @@ class UserManager extends ChangeNotifier {
       }
       notifyListeners();
   }
+
+  Future<void> sendPasswordResetEmail(String email) async {
+    try {
+      await auth.sendPasswordResetEmail(email: email);
+         print('Email de redefinição de senha enviado com sucesso!');
+    } on FirebaseAuthException catch (e) {
+       print(e.message);
+    }
+  }
+
+
+
+
     
   bool get adminEnabled => user != null && user!.isAdmin != null;
 
@@ -134,15 +146,16 @@ class UserManager extends ChangeNotifier {
   
  
 
-  Future<void> openDoor() async {
-    
+  Future<void> checkStatusDoor() async {
+
+
+   
     await firestore.collection('door').snapshots().listen((snapshot) { 
       for (final DocumentSnapshot doc in snapshot.docs) {
        
         var data = Door.fromDocument(doc);
-        isOpen = data.isOpen ?? false;
+        isOpen = data.isOpen;
 
-    firestore.collection('door').doc('AtU8C5OmkJdaJRkKnyws').update({'status': !isOpen!});
 
     
 
@@ -154,6 +167,21 @@ class UserManager extends ChangeNotifier {
     notifyListeners();
     
   }
+
+
+  //open door
+  Future<void> openDoor() async {
+    
+    await  firestore.collection('door').doc('AtU8C5OmkJdaJRkKnyws').set({'status': !isOpen!});
+
+    
+
+    notifyListeners();
+
+  }
+
+
+
 
   Future<void> loadAllRequests(UserProfile user) async {
       await user.saveData();

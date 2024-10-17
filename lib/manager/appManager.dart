@@ -1,7 +1,7 @@
 
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/foundation.dart';
+
 import 'package:flutter/material.dart';
 import 'package:lanchonete_app/Utils/statusMessage.dart';
 import 'package:lanchonete_app/components/cardClienteChoice.dart';
@@ -35,7 +35,7 @@ class AppManager extends ChangeNotifier{
     
    StatusMessage(statusSucces: true).showMySnackBar(context: context, msg: 'Aviso atualizado!');
     
-    await firestore.collection('notices').doc('U3iyDQjawnnLUV6rNU86').update({'mensage' : mensage});
+    await firestore.collection('notices').doc('U3iyDQjawnnLUV6rNU86').set({'mensage' : mensage});
 
 
 
