@@ -52,7 +52,7 @@ class _CardJuiceManagerState extends State<CardJuiceManager> {
         image : this.widget.image,
         price : this.widget.price,
         description: this.widget.description,
-        selectSavory: select,
+        selectJuice: select,
       );
 
       if(select){

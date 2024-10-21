@@ -6,10 +6,10 @@ class Juice{
   String? image;
   String? description;
   double? price;
-  bool? selectSavory = false;
+  bool? selectJuice = false;
 
 
-  Juice({this.id, this.image, this.description, this.price, this.selectSavory});
+  Juice({this.id, this.image, this.description, this.price, this.selectJuice});
 
 
  

@@ -170,9 +170,18 @@ class UserManager extends ChangeNotifier {
 
 
   //open door
-  Future<void> openDoor() async {
+  Future<void> openDoor(BuildContext context) async {
+
+    try {
+        await  firestore.collection('door').doc('AtU8C5OmkJdaJRkKnyws').set({'status': !isOpen!});
+
+    StatusMessage(statusSucces: true).showMySnackBar(context: context, msg: 'Porta atualizada!');
+
+    } catch (e) {
+      
+    }
     
-    await  firestore.collection('door').doc('AtU8C5OmkJdaJRkKnyws').set({'status': !isOpen!});
+  
 
     
 

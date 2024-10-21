@@ -48,7 +48,7 @@ class ProfileScreen extends StatelessWidget {
                       ButtonManager( 
                         image: 'assets/images/door.png',
                         function: () async {
-                          usermanager.openDoor();
+                          usermanager.openDoor(context);
                         },
                       ),
                       ButtonManager(

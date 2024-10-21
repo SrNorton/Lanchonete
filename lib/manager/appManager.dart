@@ -33,11 +33,11 @@ class AppManager extends ChangeNotifier{
   Future<void> createNotices(String mensage, BuildContext context) async { 
     try {
     
-   StatusMessage(statusSucces: true).showMySnackBar(context: context, msg: 'Aviso atualizado!');
     
     await firestore.collection('notices').doc('U3iyDQjawnnLUV6rNU86').set({'mensage' : mensage});
 
 
+   StatusMessage(statusSucces: true).showMySnackBar(context: context, msg: 'Aviso atualizado!');
 
 
       
@@ -56,13 +56,30 @@ class AppManager extends ChangeNotifier{
      });
      notifyListeners();
   }
+  //delete all itens
+  Future<void> deleteAllStoveItems(BuildContext context) async {
+  final CollectionReference stoveCollection =
+      FirebaseFirestore.instance.collection('stove');
 
+  try {
+    final QuerySnapshot querySnapshot = await stoveCollection.get();
 
+    for (QueryDocumentSnapshot document in querySnapshot.docs) {
+      await document.reference.delete();
+    }
+
+   StatusMessage(statusSucces: true).showMySnackBar(context: context, msg: 'Você limpou a estufa!');
+
+    print('Todos os itens da estufa foram excluídos com sucesso.');
+  } catch (e) {
+    print('Erro ao excluir itens da estufa: $e');
+  }
+}
    
 
   
 
-
+  //delete one item
   Future<void> deleteItemStove(String itemId) async {
     try {
       await firestore.collection('stove').doc(itemId).delete();
@@ -121,10 +138,28 @@ class AppManager extends ChangeNotifier{
     }
   }
 
+  Future<void> deleteAllJuicesItems(BuildContext context) async {
+  final CollectionReference juiceCollection =
+      FirebaseFirestore.instance.collection('juice');
+
+  try {
+    final QuerySnapshot querySnapshot = await juiceCollection.get();
+
+    for (QueryDocumentSnapshot document in querySnapshot.docs) {
+      await document.reference.delete();
+    }
+
+   StatusMessage(statusSucces: true).showMySnackBar(context: context, msg: 'Você limpou os sucos!');
+
+    print('Todos os sucos foram excluídos com sucesso.');
+  } catch (e) {
+    print('Erro ao excluir itens da estufa: $e');
+  }
+}
 
 
 
-  openSavoryModalbottom(BuildContext context, bool savory){
+  openSavoryJuiceModalbottom(BuildContext context, bool savory){
     showModalBottomSheet(context: context, builder: (context){
         return SingleChildScrollView(
           child: Padding(
@@ -167,7 +202,7 @@ class AppManager extends ChangeNotifier{
                   ) : CardClientChoice(
                     id: listJuice[index].id,
                     image: listJuice[index].image,
-                    description: listJuice[index].description,
+                    description: listJuice[index].name,
                     price: listJuice[index].price,
 
                   );

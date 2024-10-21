@@ -30,6 +30,8 @@ class _JuiceManagerScreenState extends State<JuiceManagerScreen> {
 
       body: Consumer<AppManager>(
         builder: (_, appmanager,__){
+
+          
             return Column( 
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [ 

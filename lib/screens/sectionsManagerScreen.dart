@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:lanchonete_app/components/buttomSectionManager.dart';
 import 'package:lanchonete_app/constants/constants.dart';
+import 'package:lanchonete_app/manager/appManager.dart';
 import 'package:lanchonete_app/screens/juiceManagerScreen.dart';
 import 'package:lanchonete_app/screens/stoveManagerScreen.dart';
+import 'package:provider/provider.dart';
 
 class SectionsManagerScreen extends StatefulWidget {
   const SectionsManagerScreen({super.key});
@@ -43,6 +45,21 @@ class _SectionsManagerScreenState extends State<SectionsManagerScreen> {
               Navigator.of(context).push(MaterialPageRoute(builder: (context)=> StoveManagerScreen()));
             },
           ),
+
+            ButtonSectionManager(
+            title: 'Limpar estufa',
+              function: () async {
+              await context.read<AppManager>().deleteAllStoveItems(context);
+            },
+          ),
+
+            ButtonSectionManager(
+            title: 'Limpar Sucos',
+              function: () async {
+              await context.read<AppManager>().deleteAllJuicesItems(context);
+            },
+          ),
+
         ],
       ),
     );

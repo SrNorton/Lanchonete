@@ -69,7 +69,7 @@ class SavoryScreen extends StatelessWidget {
           width: 250,
           function: (){
             
-            context.read<AppManager>().openSavoryModalbottom(context, true);
+            context.read<AppManager>().openSavoryJuiceModalbottom(context, true);
           } 
          ),
          Padding(

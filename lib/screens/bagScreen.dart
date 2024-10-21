@@ -1,8 +1,11 @@
+
 import 'package:flutter/material.dart';
 import 'package:lanchonete_app/components/bagCart.dart';
 import 'package:lanchonete_app/constants/constants.dart';
 import 'package:lanchonete_app/manager/bagManager.dart';
 import 'package:lanchonete_app/manager/paymentManager.dart';
+import 'package:lanchonete_app/manager/userManager.dart';
+import 'package:lanchonete_app/models/order.dart';
 import 'package:lanchonete_app/screens/qrCodeScreen.dart';
 import 'package:provider/provider.dart';
 
@@ -31,8 +34,8 @@ class _BagScreenState extends State<BagScreen> {
         ),
         centerTitle: false,
       ),
-      body: Consumer<BagManager>(
-        builder: (_, bagManager,__){
+      body: Consumer2<BagManager, UserManager>(
+        builder: (_, bagManager, usermanager,__){
           return Column(
         children: [
           SizedBox( 
@@ -53,13 +56,32 @@ class _BagScreenState extends State<BagScreen> {
                 );
               })
           ),
+          
          
           Padding(
             padding: const EdgeInsets.only(top: 100),
             child: GestureDetector(
               onTap: () async {
-                await context.read<MercadoPagoService>().criarPagamento(100);
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => QrCodeScreen()));
+                
+                 
+                // await context.read<MercadoPagoService>().criarPagamento(100);
+                // Navigator.of(context).push(MaterialPageRoute(builder: (context) => QrCodeScreen()));
+                var order = Order(
+                  id: usermanager.user!.id,
+                  name: usermanager.user!.name ?? '',
+                  phone: usermanager.user!.phone ?? '',
+                  email: usermanager.user!.email ?? '',
+                  value: bagManager.totalPrice,
+                  itens: bagManager.listiItems.map((e) => '${e.name ?? ''} - ${e.quantity}').toList(),
+                   
+                   
+                  hourToSnack: bagManager.hours.toString(),
+                  minuteToSnack: bagManager.minutes.toString()
+
+                );
+
+               await bagManager.saveOrderToFirebase(order);
+               
               },
               child: Container(
                       height: 85,

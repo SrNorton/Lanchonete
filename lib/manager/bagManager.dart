@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:lanchonete_app/components/bagCart.dart';
+import 'package:lanchonete_app/models/order.dart';
 
 class BagManager extends ChangeNotifier{
 
   List<BagCart> listiItems = [];
 
   
-  
+  double? totalPrice;
   int _inithours = 5;
   int _initMinutes =0;
 
@@ -49,6 +50,8 @@ class BagManager extends ChangeNotifier{
     }
     
     somarPrices();
+    notifyListeners();
+
   }
 
   void removeFromBag(String id){
@@ -63,6 +66,7 @@ class BagManager extends ChangeNotifier{
       total += e.price * e.quantity;
       
      });
+     totalPrice = total;
      notifyListeners();
     return total.toString();
   }
@@ -84,4 +88,14 @@ class BagManager extends ChangeNotifier{
     notifyListeners();
 
   }
+
+  Future<void> saveOrderToFirebase(Order order) async {
+    try {
+     await order.saveData();
+     print('order salve into firebase');
+    } catch (e) {
+      print('error salve order type $e');
+    }
+  }
+
 }

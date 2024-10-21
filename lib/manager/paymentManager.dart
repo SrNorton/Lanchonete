@@ -20,7 +20,7 @@ class MercadoPagoService  extends ChangeNotifier{
 
     var body = jsonEncode({
       "transaction_amount": valor,
-      "description": "Compra de salgado",
+      "description": "Compra Rickelmy Lanches",
       "payment_method_id": "pix",
       "payer": {
         'first_name': 'zé',
