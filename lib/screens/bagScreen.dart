@@ -66,17 +66,17 @@ class _BagScreenState extends State<BagScreen> {
                  
                 // await context.read<MercadoPagoService>().criarPagamento(100);
                 // Navigator.of(context).push(MaterialPageRoute(builder: (context) => QrCodeScreen()));
-                var order = Order(
+                var order = Orders(
                   id: usermanager.user!.id,
                   name: usermanager.user!.name ?? '',
                   phone: usermanager.user!.phone ?? '',
                   email: usermanager.user!.email ?? '',
                   value: bagManager.totalPrice,
-                  itens: bagManager.listiItems.map((e) => '${e.name ?? ''} - ${e.quantity}').toList(),
+                  itens: bagManager.listiItems.map((e) => '${e.quantity} - ${e.name ?? ''}').toList(),
                    
                    
-                  hourToSnack: bagManager.hours.toString(),
-                  minuteToSnack: bagManager.minutes.toString()
+                  hourToSnack: '${bagManager.hours.toString()} : ${bagManager.minutes.toString()}',
+                  
 
                 );
 

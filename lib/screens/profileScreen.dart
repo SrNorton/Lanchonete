@@ -5,6 +5,7 @@ import 'package:lanchonete_app/components/buttonManager.dart';
 import 'package:lanchonete_app/constants/constants.dart';
 import 'package:lanchonete_app/manager/userManager.dart';
 import 'package:lanchonete_app/screens/noticesScreen.dart';
+import 'package:lanchonete_app/screens/ordersClientsscreen.dart';
 import 'package:lanchonete_app/screens/sectionsManagerScreen.dart';
 import 'package:provider/provider.dart';
 
@@ -40,51 +41,61 @@ class ProfileScreen extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 14),
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: 130,
-                  child: usermanager.user!.isAdmin! ? Row(
-                    children: [ 
-                      ButtonManager( 
-                        image: 'assets/images/door.png',
-                        function: () async {
-                          usermanager.openDoor(context);
-                        },
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Expanded(
+                    child: Container(
+                      height: 130,
+                      child: usermanager.user!.isAdmin ? Row(
+                        children: [ 
+                          ButtonManager( 
+                            image: 'assets/images/door.png',
+                            function: () async {
+                              usermanager.openDoor(context);
+                            },
+                          ),
+                          ButtonManager(
+                            image: 'assets/images/tasks.png',
+                            function:  ()async{
+                              Navigator.of(context).push(MaterialPageRoute(builder: (context) => SectionsManagerScreen()));
+                            }
+                          ),
+                          ButtonManager(
+                            image: 'assets/images/megaphone.png',
+                            function: ()async{
+                              Navigator.of(context).push(MaterialPageRoute(builder: (context) => NoticesScreen()));
+                            },
+                          ),
+                           ButtonManager(
+                            image: 'assets/images/orders.png',
+                            function: ()async{
+                              Navigator.of(context).push(MaterialPageRoute(builder: (context) => OrdersScreen()));
+                            },
+                          )
+                        ],
+                      ) : Container(
+                         width: MediaQuery.of(context).size.width,
+                      height: 130,
+                      child: Column( 
+                        children: [ 
+                          Text(usermanager.user!.email!,
+                          style: TextStyle(
+                            fontFamily: kfontFamily,
+                            fontSize: 18,
+                            color: Colors.blue,
+                          ),
+                          ),
+                           Text(usermanager.user!.phone!,
+                          style: TextStyle(
+                            fontFamily: kfontFamily,
+                            fontSize: 18,
+                            color: Colors.blue,
+                          ),
+                          ),
+                        ],
                       ),
-                      ButtonManager(
-                        image: 'assets/images/tasks.png',
-                        function:  ()async{
-                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => SectionsManagerScreen()));
-                        }
                       ),
-                      ButtonManager(
-                        image: 'assets/images/megaphone.png',
-                        function: ()async{
-                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => NoticesScreen()));
-                        },
-                      )
-                    ],
-                  ) : Container(
-                     width: MediaQuery.of(context).size.width,
-                  height: 130,
-                  child: Column( 
-                    children: [ 
-                      Text(usermanager.user!.email!,
-                      style: TextStyle(
-                        fontFamily: kfontFamily,
-                        fontSize: 18,
-                        color: Colors.blue,
-                      ),
-                      ),
-                       Text(usermanager.user!.phone!,
-                      style: TextStyle(
-                        fontFamily: kfontFamily,
-                        fontSize: 18,
-                        color: Colors.blue,
-                      ),
-                      ),
-                    ],
-                  ),
+                    ),
                   ),
                 ),
               ),

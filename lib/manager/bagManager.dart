@@ -89,7 +89,7 @@ class BagManager extends ChangeNotifier{
 
   }
 
-  Future<void> saveOrderToFirebase(Order order) async {
+  Future<void> saveOrderToFirebase(Orders order) async {
     try {
      await order.saveData();
      print('order salve into firebase');

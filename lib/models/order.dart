@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Order {
+class Orders {
   String? id;
   double? value;
   List<String>? itens;
@@ -9,22 +9,23 @@ class Order {
   String? email;
   String? phone;
   String? hourToSnack;
-  String? minuteToSnack;
+  
 
-  Order({this.id, this.itens, this.value, this.name, this.email, this.phone, this.hourToSnack, this.minuteToSnack});
+  Orders({this.id, this.itens, this.value, this.name, this.email, this.phone, this.hourToSnack,});
 
 
   DocumentReference get firestoreRef => FirebaseFirestore.instance.doc('order/$id');
 
 
-   Order.fromDocument(DocumentSnapshot document){
+   Orders.fromDocument(DocumentSnapshot document){
     id = document.id;
-    name = document['name'];
-    itens = document['itens'];
-    phone = document['phone'];
-    email = document['email'];
-    hourToSnack = document['hour'];
-    minuteToSnack = document['minutes'];
+    name = document['name'] as String;
+    itens = List<String>.from(document['itens'] as List<dynamic>);
+    value = double.parse(document['amount']);
+    phone = document['phone'] as String;
+    
+    hourToSnack = document['hour'] as String;
+    
   }
 
 
@@ -42,7 +43,7 @@ class Order {
       'name' : name,
       'phone' : phone,
       'hour': hourToSnack,
-      'minutes' : minuteToSnack
+      
     };
   }
 
