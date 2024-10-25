@@ -2,7 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:lanchonete_app/components/buttomConfirmOrder.dart';
 import 'package:lanchonete_app/constants/constants.dart';
+import 'package:lanchonete_app/manager/appManager.dart';
 import 'package:lanchonete_app/models/order.dart';
+import 'package:provider/provider.dart';
 
 class OrdersScreen extends StatefulWidget {
   const OrdersScreen({super.key});
@@ -58,8 +60,10 @@ class _OrdersScreenState extends State<OrdersScreen> {
                         itemCount: orderList.length,
                         itemBuilder: (context, index){
                           return CardClientOrder(
+                            id: orderList[index].id,
                             name: orderList[index].name,
                             itens: orderList[index].itens,
+                            orderStatus: orderList[index].orderAccepeted,
                             price: orderList[index].value.toString(),
                             hourToSnack: orderList[index].hourToSnack,
                             phone: orderList[index].phone
@@ -78,9 +82,11 @@ class _OrdersScreenState extends State<OrdersScreen> {
 
 
 
-class CardClientOrder extends StatelessWidget {
+class CardClientOrder extends StatefulWidget {
+  String? id;
   String? name;
   List<String>? itens;
+  bool? orderStatus = false;
   String? price;
   String? hourToSnack;
   String? phone;
@@ -88,15 +94,32 @@ class CardClientOrder extends StatelessWidget {
 
   CardClientOrder({
     super.key,
+    this.id,
     this.name,
     this.itens,
+    this.orderStatus,
     this.price,
     this.hourToSnack,
     this.phone,
   });
 
   @override
+  State<CardClientOrder> createState() => _CardClientOrderState();
+}
+
+class _CardClientOrderState extends State<CardClientOrder> {
+
+  
+  @override
   Widget build(BuildContext context) {
+
+    changeOrderStatus(){
+    setState(() {
+      widget.orderStatus = !widget.orderStatus!;
+    });
+
+  }
+
     return Column( 
       children: [ 
         SizedBox(
@@ -126,7 +149,7 @@ class CardClientOrder extends StatelessWidget {
                     color: Colors.black,
                     ),
                     SizedBox(width: 30,),
-                    Text(name!,
+                    Text(widget.name!,
                     style: TextStyle( 
                      fontSize: 26,
                      fontFamily: kfontFamily,
@@ -142,9 +165,9 @@ class CardClientOrder extends StatelessWidget {
                   height: 160,
                   
                   child: ListView.builder(
-                    itemCount: itens!.length,
+                    itemCount: widget.itens!.length,
                     itemBuilder: (context, index) => TextDescriptionItemOrder(
-                      title: itens![index],
+                      title: widget.itens![index],
                     )),
                 ),
               ),
@@ -155,7 +178,7 @@ class CardClientOrder extends StatelessWidget {
                   Icon(Icons.alarm,
                   size: 35,
                   ),
-                  Text(hourToSnack!,
+                  Text(widget.hourToSnack!,
                   style: TextStyle( 
                          fontSize: 35,
                          fontFamily: kfontFamily,
@@ -167,7 +190,7 @@ class CardClientOrder extends StatelessWidget {
                   size: 35,
                   color: ktextGreen,
                   ),
-                  Text(price!,
+                  Text(widget.price!,
                    style: TextStyle( 
                          fontSize: 35,
                          color: ktextGreen,
@@ -184,7 +207,7 @@ class CardClientOrder extends StatelessWidget {
                    Icon(Icons.phone,
                   size: 18,
                   ),
-                  Text(phone!, 
+                  Text(widget.phone!, 
                   style: TextStyle( 
                     color: Colors.blue,
                     fontSize: 18
@@ -193,8 +216,11 @@ class CardClientOrder extends StatelessWidget {
                   SizedBox(width: 47,),
                   ButtomConfirmOrder(
                     title: 'OK',
-                    color: Colors.red,
-                    function: (){},
+                    color: widget.orderStatus! ? Colors.green : Colors.red,
+                    function: () async {
+                      changeOrderStatus();
+                      await context.read<AppManager>().acceptOrder(widget.id!, widget.orderStatus ?? false);
+                    },
                   ),
                 ],),
               ),

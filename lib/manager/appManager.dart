@@ -47,6 +47,16 @@ class AppManager extends ChangeNotifier{
   }
 
 
+  Future<void> acceptOrder(String id, bool status) async {
+      try {
+     await firestore.collection('order').doc(id).update({'status' : status});
+        print('pedido aceito');
+      } catch (e) {
+        print('erro ao aceitar pedido $e');
+      }
+  }
+
+
   Future<void> _readNotices() async {
     await firestore.collection('notices').snapshots().listen((snapshot) {
       for (DocumentSnapshot doc in  snapshot.docs) {

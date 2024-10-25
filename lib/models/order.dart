@@ -6,12 +6,13 @@ class Orders {
   List<String>? itens;
   
   String? name;
+  bool? orderAccepeted;
   String? email;
   String? phone;
   String? hourToSnack;
   
 
-  Orders({this.id, this.itens, this.value, this.name, this.email, this.phone, this.hourToSnack,});
+  Orders({this.id, this.itens, this.value, this.name, this.orderAccepeted, this.email, this.phone, this.hourToSnack,});
 
 
   DocumentReference get firestoreRef => FirebaseFirestore.instance.doc('order/$id');
@@ -20,6 +21,7 @@ class Orders {
    Orders.fromDocument(DocumentSnapshot document){
     id = document.id;
     name = document['name'] as String;
+    orderAccepeted = document['status'] as bool;
     itens = List<String>.from(document['itens'] as List<dynamic>);
     value = double.parse(document['amount']);
     phone = document['phone'] as String;
@@ -40,6 +42,7 @@ class Orders {
       
       'amount' : value.toString(),
       'itens' : itens,
+      'status' : orderAccepeted ?? false,
       'name' : name,
       'phone' : phone,
       'hour': hourToSnack,
