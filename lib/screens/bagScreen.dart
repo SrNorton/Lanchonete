@@ -64,8 +64,6 @@ class _BagScreenState extends State<BagScreen> {
               onTap: () async {
                 
                  
-                // await context.read<MercadoPagoService>().criarPagamento(100);
-                // Navigator.of(context).push(MaterialPageRoute(builder: (context) => QrCodeScreen()));
                 var order = Orders(
                   id: usermanager.user!.id,
                   name: usermanager.user!.name ?? '',
@@ -81,6 +79,10 @@ class _BagScreenState extends State<BagScreen> {
                 );
 
                await bagManager.saveOrderToFirebase(order);
+                await context.read<MercadoPagoService>().criarPagamento(order);
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => QrCodeScreen()));
+
+               
                
               },
               child: Container(

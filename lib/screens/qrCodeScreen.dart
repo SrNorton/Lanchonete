@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lanchonete_app/components/buttom.dart';
 import 'package:lanchonete_app/constants/constants.dart';
+import 'package:lanchonete_app/manager/paymentManager.dart';
+import 'package:provider/provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class QrCodeScreen extends StatefulWidget {
@@ -32,7 +34,7 @@ class _QrCodeScreenState extends State<QrCodeScreen> {
               child: Padding(
                 padding: const EdgeInsets.only(left: 55.0, right: 55.0, top: 80),
                 child: QrImageView(
-                  data: '',
+                  data: context.watch<MercadoPagoService>().imageQrcodeMercadoPago!,
                   version: QrVersions.auto,
                   size: 100,
                 ),

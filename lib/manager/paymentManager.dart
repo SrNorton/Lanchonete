@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
+import 'package:lanchonete_app/models/order.dart';
 import 'package:lanchonete_app/models/paymentStatus.dart';
 import 'dart:convert';
 import 'package:uuid/uuid.dart'; // Adicione a dependência uuid no seu pubspec.yaml
@@ -9,23 +10,27 @@ import 'package:uuid/uuid.dart'; // Adicione a dependência uuid no seu pubspec.
 class MercadoPagoService  extends ChangeNotifier{
 
   late PaymentStatus paymentStatus;
+  String? imageQrcodeMercadoPago;
 
    String mercadoPagoAccessToken = dotenv.env['MERCADOPAGO_ACCESS_TOKEN']!;
  // Substitua pelo seu token de acesso
 
-  Future<Map<String, dynamic>> criarPagamento(double valor) async {
+  Future<Map<String, dynamic>> criarPagamento(Orders order) async {
     var url = 'https://api.mercadopago.com/v1/payments';
     
     var idempotencyKey = Uuid().v4(); // Gera um UUID único
 
     var body = jsonEncode({
-      "transaction_amount": valor,
+      "transaction_amount": order.value,
       "description": "Compra Rickelmy Lanches",
       "payment_method_id": "pix",
       "payer": {
-        'first_name': 'zé',
+        'first_name': order.name,
+        'phone' : {
         
-        "email": "comprador@example.com" // Email do comprador
+        "number": order.phone
+      },
+        "email": order.email // Email do comprador
       }
     });
 
@@ -44,6 +49,7 @@ class MercadoPagoService  extends ChangeNotifier{
       var json = PaymentStatus.fromJson(data);
       paymentStatus = json;
       print('Esse é o id do pagamento ${paymentStatus.id ?? ''}');
+      imageQrcodeMercadoPago = data["point_of_interaction"]['transaction_data'][ "qr_code"];
       print('olha o qr code aqui minha gente ${data["point_of_interaction"]['transaction_data'][ "qr_code"]}');
       await getPaymentData(paymentStatus.id!);
       return data;
