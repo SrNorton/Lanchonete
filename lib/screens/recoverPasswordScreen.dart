@@ -68,7 +68,16 @@ class RecoverPasswordScreen extends StatelessWidget {
                         }, color: Colors.blue);
                         },
                         
-                      )
+                      ),
+                      SizedBox(height: 80,),
+                      TextButton(onPressed: (){
+                        Navigator.of(context).pop();
+                      }, child: Text('Voltar',
+                      style: TextStyle(
+                        color: Colors.blue,
+                        fontSize: 20
+                      ), 
+                      textAlign: TextAlign.right,))
           ],
         ),
       ),

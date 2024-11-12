@@ -49,6 +49,7 @@ class _QrCodeScreenState extends State<QrCodeScreen> {
           SizedBox(height: 70,),
           Buttom(title: 'Copiar QRCode', function: () async {
             copyQrCode(Qrcode);
+            Navigator.of(context).pop();
           }, color: Colors.red),
         ],
       ),

@@ -5,6 +5,7 @@ import 'package:lanchonete_app/constants/constants.dart';
 import 'package:lanchonete_app/Utils/validators.dart';
 import 'package:lanchonete_app/manager/userManager.dart';
 import 'package:lanchonete_app/models/userProfile.dart';
+import 'package:lanchonete_app/screens/recoverPasswordScreen.dart';
 import 'package:lanchonete_app/screens/registerScreen.dart';
 import 'package:provider/provider.dart';
 
@@ -105,7 +106,13 @@ class LoginScreen extends StatelessWidget {
                       alignment: Alignment.bottomRight,
                       child: Padding(
                         padding: const EdgeInsets.only(right: 30),
-                        child: TextButton(onPressed: (){}, child: Text('Esqueci minha senha!',
+                        child: TextButton(onPressed: (){
+                           Navigator.of(context).push(
+                        MaterialPageRoute(builder:(context) {
+                          return RecoverPasswordScreen();
+                        },)
+                      );
+                        }, child: Text('Esqueci minha senha!',
                         style: TextStyle( 
                           color: Colors.blue,
                           fontSize: 10
