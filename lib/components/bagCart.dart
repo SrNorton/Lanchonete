@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:lanchonete_android_project/components/editHours.dart';
 import 'package:lanchonete_android_project/components/editMinutes.dart';
+import 'package:lanchonete_android_project/components/manager_quantity_item.dart';
+import 'package:lanchonete_android_project/components/removefrom_bag.dart';
 import 'package:lanchonete_android_project/constants/constants.dart';
 import 'package:lanchonete_android_project/manager/bagManager.dart';
 import 'package:provider/provider.dart';
@@ -28,6 +31,7 @@ class BagCart extends StatefulWidget {
 class _BagCartState extends State<BagCart> {
   @override
   Widget build(BuildContext context) {
+    
     return Padding(
       padding: const EdgeInsets.only(left: 18, right: 18, bottom: 30),
       child: Container(
@@ -64,7 +68,7 @@ class _BagCartState extends State<BagCart> {
                       style: TextStyle( 
                         fontFamily: kfontFamily,
                         fontWeight: FontWeight.bold,
-                        fontSize: 20,
+                        fontSize: 16,
                         color: Colors.black,
                       ),
                       
@@ -74,8 +78,8 @@ class _BagCartState extends State<BagCart> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Container(
-                          height: 25,
-                          width: 25,
+                          height: 20,
+                          width: 20,
                           child: Image.asset('assets/images/clock.png'),
                         ),
                         SizedBox(width: 8,),
@@ -135,45 +139,14 @@ class _BagCartState extends State<BagCart> {
                     ),
                       SizedBox(height: 24,),
                      
-                        GestureDetector(
-                          onTap: (){
-                            context.read<BagManager>().removeFromBag(widget.id!);
-                          },
-                          child: 
-                          Text('Remover item',
-                          style: TextStyle( 
-                            fontFamily: kfontFamily,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                            color: Colors.red
-                          ),
-                          ),
-                        ),
+                        RemoveFromBagScreen(id: widget.id!),
                         
                   ],
                 ),
               
               )),
-                Padding(
-                  padding: const EdgeInsets.only(right: 12, left: 8),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                    IconButton(icon: Icon(Icons.add_circle, color: Colors.blue,), onPressed: () { 
-                      context.read<BagManager>().addQuantity(widget.id!);
-                     },),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 15, bottom: 15),
-                      child: Text(widget.quantity.toString(),
-                      style: TextStyle(
-                        fontSize: 18,
-                      ),
-                      ),
-                    ),
-                   IconButton(icon: Icon(Icons.remove_circle,color: Colors.blue,), onPressed: () {
-                     context.read<BagManager>().removeQuantity(widget.id!);
-                   },),
-                  ],),
+                managerQuantityItem(id: widget.id!, quantity: widget.quantity.toString(),
+                  
                 )
           ],
         ),
@@ -181,3 +154,4 @@ class _BagCartState extends State<BagCart> {
     );
   }
 }
+

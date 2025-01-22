@@ -95,6 +95,8 @@ class UserManager extends ChangeNotifier {
       user.id = result.user!.uid;
 
       await user.saveData();
+      await _loadCurrentUser(firebaseUser: result.user);
+
 
     StatusMessage(statusSucces: true).showMySnackBar(context: context, msg: 'Cadastro Efetuado com sucesso!');
     Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_)=> PageViewManager()));

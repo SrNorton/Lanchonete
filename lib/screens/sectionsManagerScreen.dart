@@ -29,45 +29,48 @@ class _SectionsManagerScreenState extends State<SectionsManagerScreen> {
         ),
         centerTitle: false,
       ),
-      body: Column( 
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Column( 
+          
+          children: [ 
+            SizedBox(height: 100,),
+            ButtonSectionManager(
+              title: 'Sucos disponiveis',
+                function: () async {
+                Navigator.of(context).push(MaterialPageRoute(builder: (context)=> JuiceManagerScreen()));
+              },
+            ),
+          
+            ButtonSectionManager(
+              title: 'Estufa',
+              function: () async {
+                Navigator.of(context).push(MaterialPageRoute(builder: (context)=> StoveManagerScreen()));
+              },
+            ),
         
-        children: [ 
-          SizedBox(height: 100,),
-          ButtonSectionManager(
-            title: 'Sucos disponiveis',
-              function: () async {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context)=> JuiceManagerScreen()));
-            },
-          ),
+              ButtonSectionManager(
+              title: 'Limpar estufa',
+                function: () async {
+                await context.read<AppManager>().deleteAllStoveItems(context);
+              },
+            ),
         
-          ButtonSectionManager(
-            title: 'Estufa',
-            function: () async {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context)=> StoveManagerScreen()));
-            },
-          ),
-
-            ButtonSectionManager(
-            title: 'Limpar estufa',
-              function: () async {
-              await context.read<AppManager>().deleteAllStoveItems(context);
-            },
-          ),
-
-            ButtonSectionManager(
-            title: 'Limpar Sucos',
-              function: () async {
-              await context.read<AppManager>().deleteAllJuicesItems(context);
-            },
-          ),
-            ButtonSectionManager(
-            title: 'Deletar Pedidos',
-              function: () async {
-              await context.read<AppManager>().deleteAllOrders(context);
-            },
-          ),
-
-        ],
+              ButtonSectionManager(
+              title: 'Limpar Sucos',
+                function: () async {
+                await context.read<AppManager>().deleteAllJuicesItems(context);
+              },
+            ),
+              ButtonSectionManager(
+              title: 'Deletar Pedidos',
+                function: () async {
+                await context.read<AppManager>().deleteAllOrders(context);
+              },
+            ),
+        
+          ],
+        ),
       ),
     );
   }

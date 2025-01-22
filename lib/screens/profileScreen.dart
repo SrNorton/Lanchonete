@@ -48,62 +48,59 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 14),
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Expanded(
-                    child: Container(
-                      height: 130,
-                      child: usermanager.user!.isAdmin ? Row(
-                        children: [ 
-                          ButtonManager( 
-                            image: 'assets/images/door.png',
-                            function: () async {
-                              usermanager.openDoor(context);
-                            },
-                          ),
-                          ButtonManager(
-                            image: 'assets/images/tasks.png',
-                            function:  ()async{
-                              Navigator.of(context).push(MaterialPageRoute(builder: (context) => SectionsManagerScreen()));
-                            }
-                          ),
-                          ButtonManager(
-                            image: 'assets/images/megaphone.png',
-                            function: ()async{
-                              Navigator.of(context).push(MaterialPageRoute(builder: (context) => NoticesScreen()));
-                            },
-                          ),
-                           ButtonManager(
-                            image: 'assets/images/orders.png',
-                            function: ()async{
-                              Navigator.of(context).push(MaterialPageRoute(builder: (context) => OrdersScreen()));
-                            },
-                          )
-                        ],
-                      ) : Container(
-                         width: MediaQuery.of(context).size.width,
-                      height: 400,
-                      child: Column( 
-                        children: [ 
-                          Text(usermanager.user!.email!,
-                          style: TextStyle(
-                            fontFamily: kfontFamily,
-                            fontSize: 18,
-                            color: Colors.blue,
-                          ),
-                          ),
-                           Text(usermanager.user!.phone!,
-                          style: TextStyle(
-                            fontFamily: kfontFamily,
-                            fontSize: 18,
-                            color: Colors.blue,
-                          ),
-                          ),
-                          
-                        ],
+                child: Container(
+                  height: 130,
+                  
+                  child: usermanager.user!.isAdmin ? ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: [ 
+                      ButtonManager( 
+                        image: 'assets/images/door.png',
+                        function: () async {
+                          usermanager.openDoor(context);
+                        },
+                      ),
+                      ButtonManager(
+                        image: 'assets/images/tasks.png',
+                        function:  ()async{
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => SectionsManagerScreen()));
+                        }
+                      ),
+                      ButtonManager(
+                        image: 'assets/images/megaphone.png',
+                        function: ()async{
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => NoticesScreen()));
+                        },
+                      ),
+                       ButtonManager(
+                        image: 'assets/images/orders.png',
+                        function: ()async{
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => OrdersScreen()));
+                        },
+                      )
+                    ],
+                  ) : Container(
+                     width: MediaQuery.of(context).size.width,
+                  height: 400,
+                  child: Column( 
+                    children: [ 
+                      Text(usermanager.user!.email!,
+                      style: TextStyle(
+                        fontFamily: kfontFamily,
+                        fontSize: 18,
+                        color: Colors.blue,
                       ),
                       ),
-                    ),
+                       Text(usermanager.user!.phone!,
+                      style: TextStyle(
+                        fontFamily: kfontFamily,
+                        fontSize: 18,
+                        color: Colors.blue,
+                      ),
+                      ),
+                      
+                    ],
+                  ),
                   ),
                 ),
               ),

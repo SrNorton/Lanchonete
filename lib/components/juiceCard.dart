@@ -61,15 +61,15 @@ List<JuiceCard> listJuice = [
   JuiceCard(id: 'F1G2H3J4',name: 'Graviola', image: 'assets/images/graviola.png', description: 'Com água', price: 5.50),
   JuiceCard(id: 'VK9L8M7N6',name: 'Limão', image: 'assets/images/limoes.png', description: 'Com água', price: 5.50),
 
-  JuiceCard(id: '7Q2X9P8Y',name: 'Acerola', image: 'assets/images/acerola.png', description: 'Com Leite', price: 6.50),
-  JuiceCard(id: 'B3Z5T8V1',name: 'Abacaxi', image: kimageAbacaxi, description: 'Com Leite', price: 6.50),
-  JuiceCard(id: 'F9H4K2M6',name: 'Caju', image: 'assets/images/cajue.png', description: 'Com Leite', price: 6.50),
-  JuiceCard(id: 'R1W5E9A3',name: 'Maracuja', image: 'assets/images/maracuja.png', description: 'Com Leite', price: 6.50),
-  JuiceCard(id: 'D7G2J4L6',name: 'Morango', image: 'assets/images/morangos.png', description: 'Com Leite', price: 6.50),
-  JuiceCard(id: 'S0U5N1M4',name: 'Goiaba', image: 'assets/images/goiaba.png', description: 'Com Leite', price: 6.50),
-  JuiceCard(id: 'X2C8F1V5',name: 'Manga', image: 'assets/images/manga.png', description: 'Com Leite', price: 6.50),
-  JuiceCard(id: 'P6T0H3R9',name: 'Graviola', image: 'assets/images/graviola.png', description: 'Com Leite', price: 6.50),
-  JuiceCard(id: 'Z4B8D1W6',name: 'Limão', image: 'assets/images/limoes.png', description: 'Com Leite', price: 6.50),
+  JuiceCard(id: '7Q2X9P8Y',name: 'Com/Leite', image: 'assets/images/acerola.png', description: 'Com Leite', price: 6.50),
+  JuiceCard(id: 'B3Z5T8V1',name: 'Com/Leite', image: kimageAbacaxi, description: 'Com Leite', price: 6.50),
+  JuiceCard(id: 'F9H4K2M6',name: 'Com/Leite', image: 'assets/images/cajue.png', description: 'Com Leite', price: 6.50),
+  JuiceCard(id: 'R1W5E9A3',name: 'Com/Leite', image: 'assets/images/maracuja.png', description: 'Com Leite', price: 6.50),
+  JuiceCard(id: 'D7G2J4L6',name: 'Com/Leite', image: 'assets/images/morangos.png', description: 'Com Leite', price: 6.50),
+  JuiceCard(id: 'S0U5N1M4',name: 'Com/Leite', image: 'assets/images/goiaba.png', description: 'Com Leite', price: 6.50),
+  JuiceCard(id: 'X2C8F1V5',name: 'Com/Leite', image: 'assets/images/manga.png', description: 'Com Leite', price: 6.50),
+  JuiceCard(id: 'P6T0H3R9',name: 'Com/Leite', image: 'assets/images/graviola.png', description: 'Com Leite', price: 6.50),
+  JuiceCard(id: 'Z4B8D1W6',name: 'Com/Leite', image: 'assets/images/limoes.png', description: 'Com Leite', price: 6.50),
 
 
 

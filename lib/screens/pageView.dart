@@ -50,7 +50,7 @@ class _PageViewManagerState extends State<PageViewManager> {
 
        extendBody: true,
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.only(left: 40, right: 40,),
+        padding: const EdgeInsets.only(left: 40, right: 40, bottom: 15),
         child: CustomNavigationBar(
           strokeColor: kbaseColor,
           currentIndex: startPage,

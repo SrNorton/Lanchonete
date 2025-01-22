@@ -21,11 +21,17 @@ class _EditHoursState extends State<EditHours> {
         _initiHours > 5 ?
         IconButton(onPressed: (){
           context.read<BagManager>().removeHours();
+          setState(() {
+            
+          });
         }, icon: Icon(Icons.remove_circle)) : Container(),
         Center(child: Text(_initiHours.toString() + ' '+ 'Horas'),),
         _initiHours < 19 ? 
         IconButton(onPressed: (){
           context.read<BagManager>().addHours();
+          setState(() {
+            
+          });
 
         }, icon: Icon(Icons.add_circle)) : Container(),
 

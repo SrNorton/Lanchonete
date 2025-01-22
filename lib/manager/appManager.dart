@@ -66,6 +66,7 @@ class AppManager extends ChangeNotifier{
      });
      notifyListeners();
   }
+   
   //delete all itens
   Future<void> deleteAllStoveItems(BuildContext context) async {
   final CollectionReference stoveCollection =
@@ -188,8 +189,16 @@ Future<void> deleteAllOrders(BuildContext context) async {
 
 
   openSavoryJuiceModalbottom(BuildContext context, bool savory){
-    showModalBottomSheet(context: context, builder: (context){
+    
+    showModalBottomSheet(context: context,
+    isScrollControlled: true,
+     builder: (context){
+        
+        
+      
         return SingleChildScrollView(
+        
+        
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(

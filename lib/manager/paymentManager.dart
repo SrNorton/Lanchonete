@@ -5,7 +5,12 @@ import 'package:http/http.dart' as http;
 import 'package:lanchonete_android_project/models/order.dart';
 import 'package:lanchonete_android_project/models/paymentStatus.dart';
 import 'dart:convert';
-import 'package:uuid/uuid.dart'; // Adicione a dependência uuid no seu pubspec.yaml
+import 'package:uuid/uuid.dart'; 
+import 'package:intl/intl.dart';
+
+
+
+
 
 class MercadoPagoService  extends ChangeNotifier{
 
@@ -18,8 +23,11 @@ class MercadoPagoService  extends ChangeNotifier{
   Future<Map<String, dynamic>> criarPagamento(Orders order) async {
     var url = 'https://api.mercadopago.com/v1/payments';
     
-    var idempotencyKey = Uuid().v4(); // Gera um UUID único
-
+    var idempotencyKey = Uuid().v4(); 
+//     final agora = DateTime.now();
+//     final dataExpiracao = agora.add(Duration(days: 1)); 
+//     final dataFormatada = DateFormat("yyyy-MM-dd'T'HH:mm:ssz").format(dataExpiracao.toLocal());
+//  print('data formatada ${dataFormatada}');
     var body = jsonEncode({
       "transaction_amount": order.value,
       "description": "Compra Rickelmy Lanches App ${order.name}",
@@ -31,7 +39,9 @@ class MercadoPagoService  extends ChangeNotifier{
         "number": order.phone
       },
         "email": order.email // Email do comprador
-      }
+      },
+      
+      
     });
 
     var response = await http.post(

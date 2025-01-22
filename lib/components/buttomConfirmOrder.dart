@@ -18,8 +18,8 @@ class ButtomConfirmOrder extends StatelessWidget {
     return GestureDetector(
       onTap: function,
       child: Container(
-        width: 165,
-        height: 50,
+        width: 142,
+        height: 40,
         decoration: BoxDecoration( 
           borderRadius: BorderRadius.circular(40),
           color: color,
@@ -28,7 +28,7 @@ class ButtomConfirmOrder extends StatelessWidget {
           child: Text(title,
           style: TextStyle( 
             color: Colors.white,
-            fontSize: 30,
+            fontSize: 25,
             fontFamily: kfontFamily,
             fontWeight: FontWeight.bold
           ),

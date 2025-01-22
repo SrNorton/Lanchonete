@@ -19,12 +19,17 @@ class _EditMinutesState extends State<EditMinutes> {
           _initMinutes > 0 ?
         IconButton(onPressed: (){
           context.read<BagManager>().removeMinutes();
+          setState(() {
+            
+          });
         }, icon: Icon(Icons.remove_circle)) : Container(),
         Center(child: Text(_initMinutes.toString() + ' '+ 'Minutos'),),
         _initMinutes < 59 ? 
         IconButton(onPressed: (){
           context.read<BagManager>().addMinutes();
-
+          setState(() {
+            
+          });
         }, icon: Icon(Icons.add_circle)) : Container(),
 
       ],

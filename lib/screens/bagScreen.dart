@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:lanchonete_android_project/components/bagCart.dart';
+import 'package:lanchonete_android_project/components/buttomPaymentBagScreen.dart';
 import 'package:lanchonete_android_project/constants/constants.dart';
 import 'package:lanchonete_android_project/manager/bagManager.dart';
 import 'package:lanchonete_android_project/manager/paymentManager.dart';
@@ -18,9 +19,10 @@ class BagScreen extends StatefulWidget {
 }
 
 class _BagScreenState extends State<BagScreen> {
+
   @override
   Widget build(BuildContext context) {
-
+   
     
 
     return Scaffold(
@@ -36,7 +38,7 @@ class _BagScreenState extends State<BagScreen> {
         centerTitle: false,
       ),
       body: Consumer2<BagManager, UserManager>(
-        builder: (_, bagManager, usermanager,__){
+        builder: (context, bagManager, usermanager,__){
           return Column(
         children: [
           SizedBox( 
@@ -86,25 +88,9 @@ class _BagScreenState extends State<BagScreen> {
                
                
               },
-              child: Container(
-                      height: 85,
-                      width: MediaQuery.of(context).size.width - 45,
-                      decoration: BoxDecoration( 
-              borderRadius: BorderRadius.circular(50),
-              color: kRedButtonColor,
-              
-                      ),
-                      child: Center(
-              child: Text('Pagar Pix  R\$ ${bagManager.somarPrices() ?? '0.0'}',
-              style: TextStyle( 
-                color: Colors.white,
-                fontSize: 20,
-                fontFamily: kfontFamily,
-                fontWeight: FontWeight.bold,
+              child: BotttomPaymentBagScreen(
+                
               ),
-              ),
-                      ),
-                    ),
             ),
           ),
         ],

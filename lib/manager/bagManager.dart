@@ -1,8 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:lanchonete_android_project/components/bagCart.dart';
 import 'package:lanchonete_android_project/models/order.dart';
 
 class BagManager extends ChangeNotifier{
+
+   
 
   List<BagCart> listiItems = [];
 
@@ -56,19 +60,21 @@ class BagManager extends ChangeNotifier{
 
   void removeFromBag(String id){
     listiItems.removeWhere((e) => e.id == id);
+    somarPrices();
     notifyListeners();
   }
 
-  somarPrices(){
+  somarPrices()  {
     double total = 0;
     
     listiItems.forEach((e) {
       total += e.price * e.quantity;
+
       
      });
      totalPrice = total;
      notifyListeners();
-    return total.toString();
+    return total;
   }
 
   void addQuantity(String id){
@@ -77,17 +83,32 @@ class BagManager extends ChangeNotifier{
       listiItems[indice].quantity++;
       
     }
+    somarPrices();
     notifyListeners();
   }
+
+
 
   void removeQuantity(String id){
     var indice = listiItems.indexWhere((e) => e.id == id);
     if(indice != -1 && listiItems[indice].quantity > 1){
       listiItems[indice].quantity--;
     }
+    somarPrices();
     notifyListeners();
 
   }
+
+  int getQuantity(String id) {
+  
+  var indice = listiItems.indexWhere((e) => e.id == id);
+  if (indice != -1) {
+   
+    return listiItems[indice].quantity;
+  }
+  
+  return 0;
+}
 
   Future<void> saveOrderToFirebase(Orders order) async {
     try {

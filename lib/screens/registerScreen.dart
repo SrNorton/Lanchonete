@@ -155,8 +155,8 @@ class RegisterScreen extends StatelessWidget {
 
                           controller: _passController,
                           validator: (value){ 
-                             if(value == null || value.isEmpty){return 'Inserir sua senha!';}
-                            if(value.length < 6){return 'A senha deve conter no mínimo 6 dígitos';}
+                             if(value == null || value.isEmpty){return 'Senha 8 digitos!';}
+                            if(value.length != 8){return 'A senha deve conter 8 dígitos';}
                             return null;
                           },
                           decoration: InputDecoration(
